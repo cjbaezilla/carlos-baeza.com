@@ -140,15 +140,6 @@ const Hero = () => {
               className="flex flex-wrap justify-center md:justify-start gap-4 mt-8"
             >
               <motion.a 
-                href="#contact" 
-                className="btn px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition duration-300 shadow-lg hover:shadow-xl"
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                Get in Touch
-              </motion.a>
-              <motion.a 
                 href="#projects" 
                 className="btn px-6 py-3 bg-dark-card text-blue-400 font-medium rounded-lg border border-blue-600 hover:bg-dark-primary transition duration-300 shadow-lg hover:shadow-xl"
                 whileHover={{ scale: 1.05, y: -5 }}
