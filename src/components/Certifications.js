@@ -5,8 +5,8 @@ const Certifications = () => {
   const certifications = [
     {
       id: 1,
-      title: "Ethereum Básico",
-      issuer: "Blockchain Academy Chile",
+      title: "Ethereum Básico: Fundamentos",
+      issuer: "BAC",
       date: "2020",
       url: "https://registrado.org/r/1ead5c69b0015f8ed7ff730ff0c9163e8852ffc6.jpg",
       description: "Comprehensive course covering Ethereum fundamentals, smart contracts, and blockchain applications.",
@@ -244,7 +244,7 @@ const Certifications = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-6"
           >
             {certifications.map((cert, index) => (
               <motion.div
