@@ -148,16 +148,6 @@ const Contact = () => {
               </div>
             </div>
           </motion.div>
-
-          {/* Call to Action */}
-          <motion.div variants={itemVariants} className="mt-16">
-            <a 
-              href="mailto:carlos.baeza@gmail.com" 
-              className="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-full text-lg shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105"
-            >
-              Say Hello 👋
-            </a>
-          </motion.div>
         </motion.div>
       </div>
     </section>
