@@ -11,32 +11,36 @@ const Experience = () => {
   
   const experiences = [
     {
-      company: "TechChain Solutions",
-      role: "Lead Blockchain Engineer",
-      period: "2019 - Present",
-      description: "Leading blockchain development initiatives for enterprise clients. Designed and implemented custom Ethereum smart contracts for decentralized applications. Orchestrated the migration of legacy systems to blockchain infrastructure.",
-      techStack: ["Ethereum", "Solidity", "Smart Contracts", "Web3.js", "React", "Node.js"]
+      company: "RealT LLC",
+      role: "Blockchain Engineer / Smart Contract Developer / Scrum",
+      period: "2023 - 2025",
+      location: "Remote / Panamá City, Panamá",
+      description: "Developed Ethereum Smart Contracts for company's NFT gamification initiatives. Developed internal tooling for accounting, compliance and operations areas with special focus on automation. Performed internal Blockchain/Crypto classes for non-technical areas. Helped hardening client private information at database level. Coordinated work among several different foreign team members from China, France, EEUU, Russia, and others, interacting directly with high profile executives, partners, shareholders, and owners.",
+      techStack: ["Token Engineering", "Smart Contracts", "DAO Architecture", "Cross-chain", "AAVE Protocol", "Blockchain Accounting", "API Integrations", "Project Management", "Security", "Scrum"]
     },
     {
-      company: "DeFi Innovate",
-      role: "Senior Smart Contract Developer",
-      period: "2018 - 2019",
-      description: "Developed smart contracts for decentralized finance applications. Implemented automated market makers, lending protocols, and yield farming mechanisms. Conducted comprehensive security audits and optimized gas efficiency.",
-      techStack: ["Solidity", "Truffle", "Hardhat", "OpenZeppelin", "JavaScript", "Ethers.js"]
+      company: "La Cuarta",
+      role: "Chief of Development / Project Manager / ITIL",
+      period: "2015 - 2016",
+      location: "Santiago, Chile",
+      description: "Managed daily operational work of the main medium website ensuring its uptime. Worked closely with different areas like marketing to integrate requests without outages to the platform. Supervised hotfixes and production processes. Implemented technical documentation and process improvements across the organization.",
+      techStack: ["Server Management", "Database Management", "Technical Documentation", "Process Optimization", "ITIL", "System Hardening", "Technical Debt Management", "Capacity Planning"]
     },
     {
-      company: "BlockData Systems",
-      role: "Blockchain Developer",
-      period: "2016 - 2018",
-      description: "Contributed to the development of private blockchain solutions for supply chain management. Created RESTful APIs for blockchain interaction. Designed and implemented consensus algorithms for permissioned networks.",
-      techStack: ["Hyperledger Fabric", "Go", "JavaScript", "Node.js", "Docker", "MongoDB"]
+      company: "Radio Bio-Bio",
+      role: "Development Manager",
+      period: "2014 - 2015",
+      location: "Concepción, Chile",
+      description: "Worked closely with the company owner, with 5 engineers at my charge, ensuring the operative continuity of the medium website. Coordinated work among different areas to be integrated without outages into the main site on time. Implemented agile methodologies to improve team productivity and project delivery.",
+      techStack: ["Team Leadership", "Server Management", "Database Management", "Process Documentation", "Technical Debt", "System Hardening", "Scrum", "Capacity Building"]
     },
     {
-      company: "Web3 Innovations",
-      role: "Full Stack Developer",
-      period: "2014 - 2016",
-      description: "Developed full-stack web applications with RESTful APIs. Implemented real-time data processing systems. Managed database architecture and optimization. Integrated third-party services and payment gateways.",
-      techStack: ["JavaScript", "React", "Node.js", "Express", "MongoDB", "AWS"]
+      company: "Grupo Copesa",
+      role: "Project Manager / Developer / ITIL",
+      period: "2013 - 2014",
+      location: "Santiago, Chile",
+      description: "Coordinated projects among the different mediums of communications of the group. Visited and negotiated with different internal and external parties to achieve the correct project lifecycle on time and expectations, from proposal to production, using ITIL and PMI standards. Facilitated cross-departmental collaboration to ensure project success.",
+      techStack: ["Project Management", "ITIL", "PMI Standards", "Server Management", "Database Management", "Technical Documentation", "Negotiation", "Process Improvement"]
     },
   ];
 
@@ -105,7 +109,7 @@ const Experience = () => {
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">Professional Experience</h2>
           <div className="w-32 h-1.5 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
           <p className="text-gray-300 mt-6 max-w-2xl mx-auto text-lg">
-            My journey through the blockchain ecosystem and software development landscape
+            My journey through technology leadership and blockchain innovation
           </p>
         </motion.div>
         
@@ -147,6 +151,7 @@ const Experience = () => {
                   <span className="inline-block text-sm md:text-base font-semibold bg-gradient-to-r from-blue-500 to-indigo-500 px-4 py-1.5 rounded-full text-white shadow-md transform hover:scale-105 transition-transform duration-300">
                     {experience.period}
                   </span>
+                  <p className="text-blue-300 mt-2 text-sm">{experience.location}</p>
                 </div>
               </div>
               
