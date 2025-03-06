@@ -558,4 +558,12 @@ hr {
 .btn-cyber:hover {
   box-shadow: 0 0 20px #00f3ff;
   text-shadow: 0 0 5px #00f3ff;
+}
+
+/* Grid pattern background for Experience section */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(rgba(99, 102, 241, 0.07) 1px, transparent 1px),
+    linear-gradient(to right, rgba(99, 102, 241, 0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
 } 

@@ -40,7 +40,6 @@ const Experience = () => {
     },
   ];
 
-  // Animation variants - removed unused variables or use // eslint-disable-next-line for each
   // eslint-disable-next-line no-unused-vars
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -62,7 +61,6 @@ const Experience = () => {
     }
   };
 
-  // Assign the proper ref and inView value based on index
   // eslint-disable-next-line no-unused-vars
   const getRefAndInView = (index) => {
     switch(index) {
@@ -75,75 +73,117 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-16 bg-dark-secondary relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
-        <div className="absolute top-0 -left-10 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
-        <div className="absolute bottom-0 -right-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+    <section id="experience" className="py-20 relative overflow-hidden">
+      {/* Enhanced background with gradients and animated elements */}
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-dark-secondary to-blue-900/20 z-0"></div>
+      
+      {/* Mesh gradient background */}
+      <div className="absolute inset-0 opacity-20 z-0">
+        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-indigo-700/20 via-transparent to-transparent"></div>
+        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-700/20 via-transparent to-transparent"></div>
       </div>
       
+      {/* Animated particles/circles */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none z-0">
+        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mix-blend-overlay filter blur-3xl opacity-40 animate-pulse"></div>
+        <div className="absolute top-3/4 left-1/4 w-64 h-64 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full mix-blend-overlay filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mix-blend-overlay filter blur-3xl opacity-40 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 right-1/4 w-72 h-72 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full mix-blend-overlay filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '3s' }}></div>
+      </div>
+      
+      {/* Subtle grid pattern overlay */}
+      <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
+      
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Professional Experience</h2>
-          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
-          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
-            My journey through the blockchain ecosystem and software development industry
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gradient">Professional Experience</h2>
+          <div className="w-32 h-1.5 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+          <p className="text-gray-300 mt-6 max-w-2xl mx-auto text-lg">
+            My journey through the blockchain ecosystem and software development landscape
           </p>
-        </div>
+        </motion.div>
         
-        <div className="relative mx-auto max-w-4xl">
-          {/* Timeline Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-blue-600 z-0"></div>
+        <div className="relative mx-auto max-w-5xl">
+          {/* Timeline Line with animated gradient */}
+          <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-600 via-indigo-600 to-purple-600 z-0 rounded-full">
+            <div className="absolute inset-0 bg-gradient-to-b from-blue-600 via-indigo-600 to-purple-600 animate-pulse opacity-70 rounded-full"></div>
+          </div>
           
           {/* Timeline Items */}
           {experiences.map((experience, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, x: index % 2 === 0 ? -20 : 20 }}
+              whileInView={{ opacity: 1, y: 0, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`relative mb-12 ${
-                index % 2 === 0 ? "md:ml-auto md:pl-12 md:pr-0 md:text-left" : "md:mr-auto md:pr-12 md:pl-0 md:text-right"
-              } md:w-1/2 z-10`}
+              transition={{ duration: 0.7, delay: index * 0.15 }}
+              className={`relative mb-16 md:mb-24 flex flex-col md:flex-row ${
+                index % 2 === 0 
+                  ? "md:ml-auto md:flex-row md:pr-0 text-left md:items-start items-start" 
+                  : "md:mr-auto md:flex-row-reverse md:pl-0 text-left md:text-right md:items-start items-start"
+              } z-10`}
             >
-              {/* Timeline Circle */}
-              <div className="hidden md:block absolute top-2 w-10 h-10 rounded-full bg-blue-600 border-4 border-dark-secondary left-1/2 transform -translate-x-1/2">
-                <div className="w-full h-full rounded-full bg-blue-600 animate-ping opacity-20"></div>
+              {/* Timeline dot with pulsing animation */}
+              <div className="hidden md:flex absolute items-center justify-center left-0 md:left-1/2 transform md:-translate-x-1/2 w-12 h-12">
+                <div className="relative w-5 h-5">
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600"></div>
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 animate-ping opacity-75"></div>
+                </div>
               </div>
               
-              {/* Timeline Card */}
-              <div className="bg-dark-card rounded-xl p-6 shadow-lg border border-dark-border hover:shadow-xl transition-shadow duration-300">
-                <div className={`flex ${index % 2 !== 0 ? "md:justify-end" : ""} items-center mb-2`}>
-                  <span className="text-sm font-medium text-blue-500 px-3 py-1 rounded-full bg-blue-500/10">
+              {/* Date indicator */}
+              <div className={`md:w-1/2 ${index % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16 md:text-left"} pb-4 md:pb-0`}>
+                <div className="md:hidden relative h-full w-px bg-gradient-to-b from-blue-500 to-indigo-600 absolute left-6 top-8 bottom-0"></div>
+                <div className="md:hidden absolute left-4 top-7 w-4 h-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600">
+                  <div className="w-full h-full rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 animate-ping opacity-75"></div>
+                </div>
+                <div className="pl-12 md:pl-0">
+                  <span className="inline-block text-sm md:text-base font-semibold bg-gradient-to-r from-blue-500 to-indigo-500 px-4 py-1.5 rounded-full text-white shadow-md transform hover:scale-105 transition-transform duration-300">
                     {experience.period}
                   </span>
                 </div>
-                
-                <h3 className="text-xl font-bold text-gray-200 mb-1">{experience.role}</h3>
-                <p className="text-blue-400 font-medium mb-4">{experience.company}</p>
-                
-                <ul className={`space-y-2 ${index % 2 !== 0 ? "md:text-right" : "md:text-left"}`}>
-                  {experience.description.split('.').map((responsibility, rIndex) => (
-                    <li key={rIndex} className="flex items-start">
-                      <span className={`w-6 text-blue-500 h-5 flex-shrink-0 ${index % 2 !== 0 ? "md:order-2 md:ml-2" : "mr-2"}`}>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
+              </div>
+              
+              {/* Experience Card */}
+              <div className={`md:w-1/2 ${index % 2 === 0 ? "md:pl-16" : "md:pr-16"} pl-12 md:pl-auto`}>
+                <div className="bg-dark-card rounded-xl p-6 md:p-8 shadow-xl border border-dark-border hover:shadow-2xl transition-all duration-300 hover:border-blue-500/30 group backdrop-blur-sm relative overflow-hidden">
+                  {/* Subtle card highlight effect */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 to-purple-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-1 group-hover:text-gradient transition-colors duration-300">{experience.role}</h3>
+                  <p className="text-blue-400 font-medium text-lg mb-4">{experience.company}</p>
+                  
+                  <div className="space-y-3">
+                    {experience.description.split('.').filter(resp => resp.trim()).map((responsibility, rIndex) => (
+                      <div key={rIndex} className="flex items-start group/item">
+                        <span className="w-6 text-blue-500 h-5 flex-shrink-0 mr-2 group-hover/item:text-indigo-400 transition-colors duration-300">
+                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                          </svg>
+                        </span>
+                        <span className="text-gray-300 group-hover/item:text-gray-200 transition-colors duration-300">
+                          {responsibility.trim()}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="flex flex-wrap gap-2 mt-6">
+                    {experience.techStack.map((skill, sIndex) => (
+                      <span 
+                        key={sIndex} 
+                        className="px-3 py-1.5 bg-dark-primary rounded-full text-xs font-medium text-gray-300 border border-dark-border hover:bg-blue-900/20 hover:text-blue-300 transition-colors duration-300"
+                      >
+                        {skill}
                       </span>
-                      <span className={`text-gray-400 ${index % 2 !== 0 ? "md:order-1" : ""}`}>
-                        {responsibility.trim()}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-                
-                <div className={`flex flex-wrap gap-2 mt-4 ${index % 2 !== 0 ? "md:justify-end" : ""}`}>
-                  {experience.techStack.map((skill, sIndex) => (
-                    <span key={sIndex} className="px-2 py-1 bg-dark-primary rounded-full text-xs text-gray-400">
-                      {skill}
-                    </span>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </motion.div>
