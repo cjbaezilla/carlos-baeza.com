@@ -157,7 +157,7 @@ const Footer = () => {
                 <div className="text-2xl font-bold text-white">
                   <span className="inline-block animate-bounce text-yellow-300 mr-1">⚡</span>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-400">
-                    Carlos Baeza
+                    lightning@carlos-baeza.com
                   </span>
                 </div>
               </div>

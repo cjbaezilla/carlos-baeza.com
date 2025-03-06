@@ -8,7 +8,6 @@ import Skills from './components/Skills';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
 import Hackathons from './components/Hackathons';
-import Contact from './components/Contact';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
@@ -137,14 +136,6 @@ function App() {
               transition={{ duration: 0.8 }}
             >
               <Hackathons />
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-            >
-              <Contact />
             </motion.div>
           </main>
           <Footer />
