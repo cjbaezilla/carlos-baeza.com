@@ -5,7 +5,6 @@ const Projects = () => {
   const [activeTab, setActiveTab] = useState(0);
   const [activeFilter, setActiveFilter] = useState('all');
   const [filteredProjects, setFilteredProjects] = useState([]);
-  const canvasRef = useRef(null);
 
   // Project data with added facts
   const projects = [
@@ -166,154 +165,15 @@ const Projects = () => {
     { id: 'gamefi', label: 'GameFi' },
   ];
 
-  // Update filtered projects when activeFilter changes
+  // Initialize filtered projects on component mount
   useEffect(() => {
-    if (activeFilter === 'all') {
-      setFilteredProjects(projects);
-    } else {
-      const filtered = projects.filter(project => project.category === activeFilter);
-      setFilteredProjects(filtered);
-    }
-    setActiveTab(0);
+    setFilteredProjects(
+      activeFilter === 'all' 
+        ? projects 
+        : projects.filter(project => project.category === activeFilter)
+    );
+    setActiveTab(0); // Reset to first project when filter changes
   }, [activeFilter]);
-
-  // Set initial filtered projects
-  useEffect(() => {
-    setFilteredProjects(projects);
-  }, []);
-
-  // Canvas chart rendering
-  useEffect(() => {
-    if (!canvasRef.current || !filteredProjects.length) return;
-    
-    const renderChart = () => {
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext('2d');
-      const activeProject = filteredProjects[activeTab];
-      
-      if (!ctx || !activeProject || !activeProject.chartData) return;
-      
-      const { width, height } = canvas;
-      ctx.clearRect(0, 0, width, height);
-      
-      const { labels, datasets } = activeProject.chartData;
-      const maxValue = Math.max(...datasets.flatMap(d => d.data)) * 1.2;
-      const barWidth = width / labels.length / (datasets.length + 1);
-      const padding = { top: 40, right: 30, bottom: 60, left: 60 };
-      const chartWidth = width - padding.left - padding.right;
-      const chartHeight = height - padding.top - padding.bottom;
-      
-      // Draw axes
-      ctx.beginPath();
-      ctx.strokeStyle = '#374151';
-      ctx.lineWidth = 2;
-      ctx.moveTo(padding.left, padding.top);
-      ctx.lineTo(padding.left, height - padding.bottom);
-      ctx.lineTo(width - padding.right, height - padding.bottom);
-      ctx.stroke();
-      
-      // Draw labels
-      ctx.font = '12px Inter, sans-serif';
-      ctx.fillStyle = '#9CA3AF';
-      ctx.textAlign = 'center';
-      
-      labels.forEach((label, i) => {
-        const x = padding.left + (chartWidth / labels.length) * (i + 0.5);
-        ctx.fillText(label, x, height - padding.bottom + 20);
-      });
-      
-      // Y-axis labels
-      ctx.textAlign = 'right';
-      const ySteps = 5;
-      for (let i = 0; i <= ySteps; i++) {
-        const value = (maxValue / ySteps) * i;
-        const y = height - padding.bottom - (chartHeight / ySteps) * i;
-        ctx.fillText(value.toFixed(1), padding.left - 10, y + 4);
-        
-        // Grid lines
-        ctx.beginPath();
-        ctx.strokeStyle = '#1F2937';
-        ctx.setLineDash([5, 5]);
-        ctx.moveTo(padding.left, y);
-        ctx.lineTo(width - padding.right, y);
-        ctx.stroke();
-        ctx.setLineDash([]);
-      }
-      
-      // Draw legend
-      datasets.forEach((dataset, i) => {
-        const legendX = padding.left + 100 * i;
-        const legendY = padding.top - 20;
-        
-        ctx.fillStyle = dataset.color;
-        ctx.fillRect(legendX, legendY, 12, 12);
-        
-        ctx.fillStyle = '#D1D5DB';
-        ctx.textAlign = 'left';
-        ctx.fillText(dataset.label, legendX + 18, legendY + 10);
-      });
-      
-      // Draw bars/lines
-      datasets.forEach((dataset, datasetIndex) => {
-        const isFirstDataset = datasetIndex === 0;
-        
-        if (isFirstDataset) {
-          // Draw as bars
-          ctx.fillStyle = dataset.color;
-          
-          dataset.data.forEach((value, i) => {
-            const barHeight = (value / maxValue) * chartHeight;
-            const x = padding.left + (chartWidth / labels.length) * (i + 0.5) - barWidth / 2;
-            const y = height - padding.bottom - barHeight;
-            
-            ctx.beginPath();
-            ctx.roundRect(x, y, barWidth, barHeight, [4]);
-            ctx.fill();
-            
-            // Value label
-            ctx.fillStyle = '#FFFFFF';
-            ctx.textAlign = 'center';
-            ctx.fillText(value.toString(), x + barWidth / 2, y - 5);
-            ctx.fillStyle = dataset.color;
-          });
-        } else {
-          // Draw as line
-          ctx.strokeStyle = dataset.color;
-          ctx.lineWidth = 3;
-          ctx.beginPath();
-          
-          dataset.data.forEach((value, i) => {
-            const x = padding.left + (chartWidth / labels.length) * (i + 0.5);
-            const y = height - padding.bottom - (value / maxValue) * chartHeight;
-            
-            if (i === 0) {
-              ctx.moveTo(x, y);
-            } else {
-              ctx.lineTo(x, y);
-            }
-            
-            // Draw points
-            ctx.fillStyle = dataset.color;
-            ctx.beginPath();
-            ctx.arc(x, y, 5, 0, Math.PI * 2);
-            ctx.fill();
-            
-            // Value label
-            ctx.fillStyle = '#FFFFFF';
-            ctx.textAlign = 'center';
-            ctx.fillText(value.toString(), x, y - 15);
-            ctx.fillStyle = dataset.color;
-          });
-          
-          ctx.stroke();
-        }
-      });
-    };
-    
-    renderChart();
-    window.addEventListener('resize', renderChart);
-    return () => window.removeEventListener('resize', renderChart);
-  }, [activeTab, filteredProjects]);
 
   // Handle filter change
   const handleFilterChange = (filterId) => {
@@ -487,7 +347,17 @@ const Projects = () => {
                 className="lg:col-span-3 bg-gray-900/60 backdrop-blur-sm rounded-xl p-6 border border-gray-800"
               >
                 <div className="h-64 md:h-72 mb-6 relative">
-                  <canvas ref={canvasRef} className="w-full h-full"></canvas>
+                  {/* Project image with enhanced presentation */}
+                  <div className="w-full h-full overflow-hidden rounded-lg border border-gray-700 shadow-lg relative group">
+                    <img 
+                      src={filteredProjects[activeTab].image} 
+                      alt={filteredProjects[activeTab].title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <p className="text-xs text-gray-400">Project visualization for {filteredProjects[activeTab].title}</p>
+                    </div>
+                  </div>
                 </div>
 
                 <h4 className="text-blue-400 text-sm font-semibold uppercase tracking-wider mb-3">Industry Insights</h4>
