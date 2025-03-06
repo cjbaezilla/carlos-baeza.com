@@ -1,71 +1,69 @@
-# React with Tailwind CSS Project
+# Carlos Baeza - Professional Portfolio
 
-This is a React project set up with Tailwind CSS for rapid UI development. It includes basic component examples to help you get started.
-
-## Project Structure
-
-```
-carlos-cv/
-├── public/              # Static files
-├── src/                 # Source files
-│   ├── components/      # Reusable React components
-│   │   ├── Button.js    # Button component with multiple variants
-│   │   └── Card.js      # Card component for layout
-│   ├── App.js           # Main application component
-│   ├── index.js         # Entry point
-│   └── index.css        # Global styles (with Tailwind directives)
-└── ...                  # Configuration files
-```
+This is a personal portfolio website for Carlos Baeza, a blockchain engineer and smart contract developer with extensive experience in the cryptocurrency and decentralized finance (DeFi) ecosystem.
 
 ## Features
 
-- **React**: Modern JavaScript library for building user interfaces
-- **Tailwind CSS**: Utility-first CSS framework for rapid UI development
-- **Component Examples**: Custom Button and Card components to demonstrate best practices
+- Modern and responsive design using React and TailwindCSS
+- Interactive sections showcasing Carlos's skills, experience, and projects
+- Professional timeline of work experience
+- Interactive project showcase with detailed information
+- Certifications and publications section
+- Contact form for easy communication
+- Mobile-friendly UI
 
-## Getting Started
+## Technologies Used
 
-### Installation
+- React
+- TailwindCSS
+- JavaScript
+- HTML/CSS
 
-Make sure you have Node.js installed, then run:
+## Sections
 
-```bash
+1. **Hero** - A striking introduction to Carlos with his professional title and key skills
+2. **About** - Detailed information about Carlos's background and professional summary
+3. **Skills** - Visual representation of Carlos's technical expertise
+4. **Experience** - Timeline of Carlos's professional work history
+5. **Projects** - Interactive showcase of Carlos's blockchain projects
+6. **Certifications** - Carlos's professional certifications and publications
+7. **Contact** - Contact form and information
+
+## Installation and Setup
+
+1. Clone the repository:
+```
+git clone <repository-url>
+```
+
+2. Navigate to the project directory:
+```
+cd carlos-cv
+```
+
+3. Install dependencies:
+```
 npm install
 ```
 
-### Development
-
-Start the development server:
-
-```bash
+4. Start the development server:
+```
 npm start
 ```
 
-This will run the app in development mode at [http://localhost:3000](http://localhost:3000).
-
-### Building for Production
-
-Create a production build:
-
-```bash
+5. Build for production:
+```
 npm run build
 ```
 
-This will create an optimized build in the `build` folder.
+## Credits
 
-## Customizing Tailwind
+- Developed as a showcase of Carlos Baeza's skills and experience
+- Icons from various SVG sources
+- Fonts from Google Fonts
 
-You can customize the Tailwind configuration in the `tailwind.config.js` file. See the [Tailwind documentation](https://tailwindcss.com/docs/configuration) for more details.
+## Contact
 
-## Adding New Components
-
-To add new components:
-
-1. Create a new file in the `src/components/` directory
-2. Export your component
-3. Import and use it in your application
-
-## Learn More
-
-- [React documentation](https://reactjs.org/)
-- [Tailwind CSS documentation](https://tailwindcss.com/docs)
+For any inquiries about this project, please contact:
+- Email: carlos.baeza@gmail.com
+- GitHub: [cjbaezilla](https://github.com/cjbaezilla)
