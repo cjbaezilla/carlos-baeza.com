@@ -128,26 +128,6 @@ const Contact = () => {
               </motion.a>
             ))}
           </motion.div>
-
-          {/* Contact Info Card */}
-          <motion.div 
-            variants={itemVariants}
-            className="mt-16 bg-dark-card p-8 rounded-2xl shadow-xl border border-gray-800 max-w-2xl mx-auto backdrop-blur-sm bg-opacity-80"
-          >
-            <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-              <div className="flex items-center justify-center w-24 h-24 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full shadow-lg">
-                <svg className="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </div>
-              <div className="text-center md:text-left">
-                <h3 className="text-2xl font-bold text-white mb-2">Based in</h3>
-                <p className="text-xl text-gray-300">Santiago, Chile</p>
-                <p className="text-gray-400 mt-2">Available for remote work worldwide</p>
-              </div>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>
