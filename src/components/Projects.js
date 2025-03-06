@@ -89,11 +89,11 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-20 relative overflow-hidden bg-gradient-to-b from-white to-gray-50">
+    <section id="projects" className="py-20 relative overflow-hidden bg-dark-primary">
       {/* Animated background elements */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <motion.div 
-          className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-blue-100 mix-blend-multiply opacity-70 filter blur-3xl"
+          className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-blue-900/30 mix-blend-lighten opacity-30 filter blur-3xl"
           animate={{ 
             x: [0, 50, 0],
             y: [0, 30, 0],
@@ -105,7 +105,7 @@ const Projects = () => {
           }}
         />
         <motion.div 
-          className="absolute bottom-40 left-10 w-80 h-80 rounded-full bg-purple-100 mix-blend-multiply opacity-70 filter blur-3xl"
+          className="absolute bottom-40 left-10 w-80 h-80 rounded-full bg-purple-900/30 mix-blend-lighten opacity-30 filter blur-3xl"
           animate={{ 
             x: [0, -40, 0],
             y: [0, 50, 0],
@@ -118,7 +118,7 @@ const Projects = () => {
           }}
         />
         <motion.div 
-          className="absolute top-1/3 left-1/4 w-48 h-48 rounded-full bg-green-100 mix-blend-multiply opacity-70 filter blur-3xl"
+          className="absolute top-1/3 left-1/4 w-48 h-48 rounded-full bg-green-900/30 mix-blend-lighten opacity-30 filter blur-3xl"
           animate={{ 
             x: [0, 60, 0],
             y: [0, -30, 0],
@@ -157,7 +157,7 @@ const Projects = () => {
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeFilter === category.id 
                   ? 'bg-blue-600 text-white shadow-lg' 
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                  : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
               }`}
               whileHover={{ 
                 scale: activeFilter !== category.id ? 1.05 : 1,
@@ -193,12 +193,12 @@ const Projects = () => {
                 }
               }}
             >
-              <div className="overflow-hidden rounded-xl shadow-lg h-full bg-white">
+              <div className="card overflow-hidden h-full">
                 <div className="relative h-48 overflow-hidden">
                   <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"
+                    className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"
                     initial={{ opacity: 0 }}
-                    animate={{ opacity: hoveredProject === index ? 1 : 0.3 }}
+                    animate={{ opacity: hoveredProject === index ? 1 : 0.5 }}
                     transition={{ duration: 0.3 }}
                   />
                   <motion.img 
@@ -224,15 +224,15 @@ const Projects = () => {
                   </motion.div>
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">{project.title}</h3>
-                  <p className="text-gray-600 mb-4 text-sm">{project.description}</p>
+                <div className="p-5">
+                  <h3 className="text-xl font-bold mb-2 text-gray-200">{project.title}</h3>
+                  <p className="text-gray-400 mb-4 text-sm">{project.description}</p>
                   
                   <div className="flex flex-wrap mb-4">
                     {project.techStack.map((tech, techIndex) => (
                       <motion.span 
                         key={techIndex} 
-                        className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full mr-2 mb-2"
+                        className="bg-gray-800 text-gray-200 text-xs px-2 py-1 rounded-full mr-2 mb-2"
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ 
                           opacity: 1, 
@@ -252,7 +252,7 @@ const Projects = () => {
                   
                   <motion.a 
                     href={project.link} 
-                    className="inline-flex items-center font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                    className="inline-flex items-center font-medium text-blue-400 hover:text-blue-300 transition-colors"
                     whileHover={{ x: 5 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -274,17 +274,17 @@ const Projects = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <motion.p className="text-gray-700 mb-4">
+          <motion.p className="text-gray-300 mb-4">
             These are just a few highlights from my portfolio of innovative blockchain projects.
           </motion.p>
           <motion.a 
             href="https://github.com/cjbaezilla" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 rounded-lg bg-gray-900 text-white font-medium shadow-lg hover:bg-gray-800 transition-all duration-300"
+            className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 text-white font-medium shadow-lg hover:bg-blue-700 transition-all duration-300"
             whileHover={{ 
               scale: 1.05,
-              boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2)"
+              boxShadow: "0 10px 25px rgba(0, 0, 0, 0.4)"
             }}
             whileTap={{ scale: 0.95 }}
           >

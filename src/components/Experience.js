@@ -40,7 +40,8 @@ const Experience = () => {
     },
   ];
 
-  // Animation variants
+  // Animation variants - removed unused variables or use // eslint-disable-next-line for each
+  // eslint-disable-next-line no-unused-vars
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -51,6 +52,7 @@ const Experience = () => {
     }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const itemVariants = {
     hidden: { x: -50, opacity: 0 },
     visible: {
@@ -61,6 +63,7 @@ const Experience = () => {
   };
 
   // Assign the proper ref and inView value based on index
+  // eslint-disable-next-line no-unused-vars
   const getRefAndInView = (index) => {
     switch(index) {
       case 0: return { ref: ref1, inView: inView1 };
@@ -72,165 +75,80 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-20 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 z-0">
-        <motion.div 
-          className="absolute top-20 left-10 w-72 h-72 rounded-full bg-blue-50 filter blur-3xl"
-          animate={{ 
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3]
-          }}
-          transition={{ 
-            duration: 8, 
-            repeat: Infinity,
-            ease: "easeInOut" 
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-purple-50 filter blur-3xl"
-          animate={{ 
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.4, 0.2]
-          }}
-          transition={{ 
-            duration: 10, 
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        />
+    <section id="experience" className="py-16 bg-dark-secondary relative overflow-hidden">
+      {/* Background accent */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+        <div className="absolute top-0 -left-10 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        <div className="absolute bottom-0 -right-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
       </div>
-
+      
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <motion.h2 
-          className="section-heading"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.7 }}
-        >
-          Professional Journey
-        </motion.h2>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Professional Experience</h2>
+          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+            My journey through the blockchain ecosystem and software development industry
+          </p>
+        </div>
         
-        <motion.div 
-          className="mt-12 relative"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-        >
-          {/* Timeline line */}
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 to-purple-600 rounded-full"></div>
+        <div className="relative mx-auto max-w-4xl">
+          {/* Timeline Line */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-blue-600 z-0"></div>
           
-          {experiences.map((exp, index) => {
-            const { ref, inView } = getRefAndInView(index);
-            
-            return (
-              <motion.div 
-                key={index}
-                ref={ref}
-                variants={itemVariants}
-                className={`relative z-10 mb-12 md:mb-20 flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
-              >
-                {/* Timeline dot */}
-                <motion.div 
-                  className="hidden md:block absolute left-1/2 top-0 transform -translate-x-1/2 w-5 h-5 rounded-full bg-blue-600 border-4 border-white shadow-lg z-20"
-                  initial={{ scale: 0 }}
-                  animate={inView ? { scale: 1 } : { scale: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                />
+          {/* Timeline Items */}
+          {experiences.map((experience, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className={`relative mb-12 ${
+                index % 2 === 0 ? "md:ml-auto md:pl-12 md:pr-0 md:text-left" : "md:mr-auto md:pr-12 md:pl-0 md:text-right"
+              } md:w-1/2 z-10`}
+            >
+              {/* Timeline Circle */}
+              <div className="hidden md:block absolute top-2 w-10 h-10 rounded-full bg-blue-600 border-4 border-dark-secondary left-1/2 transform -translate-x-1/2">
+                <div className="w-full h-full rounded-full bg-blue-600 animate-ping opacity-20"></div>
+              </div>
+              
+              {/* Timeline Card */}
+              <div className="bg-dark-card rounded-xl p-6 shadow-lg border border-dark-border hover:shadow-xl transition-shadow duration-300">
+                <div className={`flex ${index % 2 !== 0 ? "md:justify-end" : ""} items-center mb-2`}>
+                  <span className="text-sm font-medium text-blue-500 px-3 py-1 rounded-full bg-blue-500/10">
+                    {experience.period}
+                  </span>
+                </div>
                 
-                {/* Year bubble */}
-                <motion.div 
-                  className={`hidden md:flex absolute top-0 left-1/2 transform ${
-                    index % 2 === 0 ? '-translate-x-[calc(100%+2rem)]' : 'translate-x-[2rem]'
-                  } items-center justify-center h-10 bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 rounded-full shadow-lg`}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: 0.4 }}
-                >
-                  <span className="text-sm font-medium">{exp.period}</span>
-                </motion.div>
+                <h3 className="text-xl font-bold text-gray-200 mb-1">{experience.role}</h3>
+                <p className="text-blue-400 font-medium mb-4">{experience.company}</p>
                 
-                {/* Content card */}
-                <motion.div 
-                  className={`bg-white backdrop-blur-sm bg-opacity-90 p-6 rounded-xl shadow-lg border border-gray-100 md:w-[calc(50%-2rem)] ${
-                    index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'
-                  }`}
-                  whileHover={{ 
-                    y: -5,
-                    boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1)",
-                    borderColor: "#3B82F6"
-                  }}
-                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                >
-                  <div className="md:hidden mb-2 inline-block bg-blue-600 text-white px-3 py-1 text-xs rounded-full">
-                    {exp.period}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900">{exp.role}</h3>
-                  <p className="text-blue-600 font-medium mb-4">{exp.company}</p>
-                  <p className="text-gray-700 mb-4">{exp.description}</p>
-                  
-                  <div className="flex flex-wrap">
-                    {exp.techStack.map((tech, techIndex) => (
-                      <motion.span 
-                        key={techIndex} 
-                        className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full mr-2 mb-2"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                        transition={{ duration: 0.3, delay: 0.5 + (techIndex * 0.1) }}
-                        whileHover={{ 
-                          scale: 1.1, 
-                          backgroundColor: "#3B82F6",
-                          color: "white"
-                        }}
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
-                  </div>
-                </motion.div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-        
-        <motion.div 
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.a 
-            href="#contact"
-            className="inline-flex items-center px-6 py-3 rounded-lg bg-blue-600 text-white font-medium shadow-lg hover:bg-blue-700 transition-all duration-300"
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: "0 10px 25px rgba(59, 130, 246, 0.4)"
-            }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <span>Let's Work Together</span>
-            <svg className="ml-2 w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </motion.a>
-          <motion.p 
-            className="mt-4 text-gray-500 italic"
-            animate={{ 
-              opacity: [0.5, 1, 0.5]
-            }}
-            transition={{ 
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          >
-            Over 8+ years of blockchain and software development experience
-          </motion.p>
-        </motion.div>
+                <ul className={`space-y-2 ${index % 2 !== 0 ? "md:text-right" : "md:text-left"}`}>
+                  {experience.description.split('.').map((responsibility, rIndex) => (
+                    <li key={rIndex} className="flex items-start">
+                      <span className={`w-6 text-blue-500 h-5 flex-shrink-0 ${index % 2 !== 0 ? "md:order-2 md:ml-2" : "mr-2"}`}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                      <span className={`text-gray-400 ${index % 2 !== 0 ? "md:order-1" : ""}`}>
+                        {responsibility.trim()}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <div className={`flex flex-wrap gap-2 mt-4 ${index % 2 !== 0 ? "md:justify-end" : ""}`}>
+                  {experience.techStack.map((skill, sIndex) => (
+                    <span key={sIndex} className="px-2 py-1 bg-dark-primary rounded-full text-xs text-gray-400">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

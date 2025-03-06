@@ -11,13 +11,14 @@ const Button = ({ children, onClick, variant = 'primary', size = 'md', className
     lg: 'px-6 py-3 text-lg',
   };
   
-  // Variant classes
+  // Variant classes for dark theme
   const variantClasses = {
-    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-300',
-    secondary: 'bg-gray-200 text-gray-800 hover:bg-gray-300 focus:ring-2 focus:ring-gray-300',
-    success: 'bg-green-600 text-white hover:bg-green-700 focus:ring-2 focus:ring-green-300',
-    danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-300',
-    outline: 'bg-transparent border border-blue-600 text-blue-600 hover:bg-blue-50 focus:ring-2 focus:ring-blue-300',
+    primary: 'bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500',
+    secondary: 'bg-gray-700 text-gray-200 hover:bg-gray-600 focus:ring-2 focus:ring-gray-500',
+    success: 'bg-green-600 text-white hover:bg-green-700 focus:ring-2 focus:ring-green-500',
+    danger: 'bg-red-600 text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500',
+    outline: 'bg-transparent border border-blue-500 text-blue-400 hover:bg-blue-900/30 focus:ring-2 focus:ring-blue-500',
+    ghost: 'bg-transparent text-gray-200 hover:bg-gray-800 focus:ring-2 focus:ring-gray-700',
   };
 
   // Combine all classes

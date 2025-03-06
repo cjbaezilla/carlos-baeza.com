@@ -1,174 +1,147 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Certifications = () => {
   const certifications = [
     {
-      title: "Ethereum Básico",
-      organization: "Blockchain Academy Chile",
-      icon: "🔹",
-      url: "https://registrado.org/r/1ead5c69b0015f8ed7ff730ff0c9163e8852ffc6.jpg"
+      id: 1,
+      title: "Certified Blockchain Developer",
+      issuer: "Blockchain Council",
+      date: "September 2022",
+      image: "/images/certifications/blockchain-dev.png",
+      description: "Demonstrates expertise in blockchain architecture, smart contract development, and distributed application design.",
+      skills: ["Solidity", "Blockchain Security", "DApp Development"]
     },
     {
-      title: "Blockchain: Foundations and Use Cases",
-      organization: "Coursera/Consensys",
-      icon: "🔷",
-      url: "https://coursera.org/share/26189cd0c0f12adb616cc0ec6fd81b62"
+      id: 2,
+      title: "Professional Scrum Master (PSM-1)",
+      issuer: "Scrum.org",
+      date: "March 2021",
+      image: "/images/certifications/psm1.png",
+      description: "Official certification in Scrum project management methodologies and agile development practices.",
+      skills: ["Agile", "Scrum", "Project Management"]
     },
     {
-      title: "Certified Smart Contract Developer",
-      organization: "Blockchain Council",
-      icon: "📜",
-      url: "https://certificates.blockchain-council.org/0e592af0-a148-48e6-92f3-872378740fd7"
+      id: 3,
+      title: "Ethereum Developer Certification",
+      issuer: "Ethereum Foundation",
+      date: "July 2020",
+      image: "/images/certifications/ethereum-dev.png",
+      description: "Specialized training in Ethereum blockchain development, smart contracts, and ERC standards.",
+      skills: ["Ethereum", "Smart Contracts", "Web3.js"]
     },
     {
-      title: "Professional Scrum Master PSM-1",
-      organization: "Scrum.org",
-      icon: "🔄",
-      url: "https://www.scrum.org/user/228026"
+      id: 4,
+      title: "Certified Bitcoin Professional",
+      issuer: "Cryptocurrency Certification Consortium",
+      date: "January 2020",
+      image: "/images/certifications/bitcoin-pro.png",
+      description: "Demonstrates a strong understanding of Bitcoin technology, security, and practical applications.",
+      skills: ["Bitcoin Protocol", "Cryptography", "Lightning Network"]
     }
   ];
 
-  const publications = [
-    {
-      title: "Up And Running WordPress Multisite using Nginx on Ubuntu 14.04",
-      type: "Book",
-      url: "https://a.co/d/15mfHRP"
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
     }
-  ];
+  };
 
-  const interviews = [
-    {
-      title: "Ingeniero Carlos Baeza Negroni: 'Copihue es una stablecoin, anclada al valor del peso chileno'",
-      publication: "Cointelegraph",
-      url: "https://es.cointelegraph.com/news/engineer-carlos-baeza-negroni-copihue-is-a-stablecoin-anchored-to-the-value-of-the-chilean-peso"
-    },
-    {
-      title: "Inspirada en DAI, la stablecoin Copihue podría tener paridad con el peso de Chile",
-      publication: "Criptonoticias",
-      url: "https://www.criptonoticias.com/entrevistas/inspirada-dai-stablecoin-copihue-tener-paridad-peso-chile"
-    },
-    {
-      title: "Interview With A Crypto Developer: Carlos Baeza Negroni",
-      publication: "Metacoin",
-      url: "https://metacoin.co/interview-with-a-crypto-developer-carlos-baeza-negroni"
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: 'spring', stiffness: 100 }
     }
-  ];
+  };
 
   return (
-    <section id="certifications" className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 md:px-6">
-        <h2 className="section-heading">Certifications & Publications</h2>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4 flex items-center">
-              <svg className="w-6 h-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              Certifications
-            </h3>
-            
-            <div className="space-y-4">
-              {certifications.map((cert, index) => (
-                <a
-                  key={index}
-                  href={cert.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition duration-300"
-                >
-                  <div className="flex items-start">
-                    <div className="text-2xl mr-3">{cert.icon}</div>
-                    <div>
-                      <h4 className="font-medium text-gray-900">{cert.title}</h4>
-                      <p className="text-sm text-gray-600">{cert.organization}</p>
-                      <div className="mt-2 text-blue-600 text-xs flex items-center">
-                        <span>View Certificate</span>
-                        <svg className="w-3 h-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4 flex items-center">
-              <svg className="w-6 h-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-              </svg>
-              Publications
-            </h3>
-            
-            <div className="space-y-4">
-              {publications.map((pub, index) => (
-                <a
-                  key={index}
-                  href={pub.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition duration-300"
-                >
-                  <div>
-                    <h4 className="font-medium text-gray-900">{pub.title}</h4>
-                    <p className="text-sm text-gray-600">{pub.type}</p>
-                    <div className="mt-2 text-blue-600 text-xs flex items-center">
-                      <span>View Publication</span>
-                      <svg className="w-3 h-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
-          
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-xl font-bold mb-4 flex items-center">
-              <svg className="w-6 h-6 text-blue-600 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
-              </svg>
-              Interviews
-            </h3>
-            
-            <div className="space-y-4">
-              {interviews.map((interview, index) => (
-                <a
-                  key={index}
-                  href={interview.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block p-4 border border-gray-200 rounded-lg hover:border-blue-400 hover:shadow-md transition duration-300"
-                >
-                  <div>
-                    <h4 className="font-medium text-gray-900 line-clamp-2">{interview.title}</h4>
-                    <p className="text-sm text-gray-600">Published by {interview.publication}</p>
-                    <div className="mt-2 text-blue-600 text-xs flex items-center">
-                      <span>Read Interview</span>
-                      <svg className="w-3 h-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    </div>
-                  </div>
-                </a>
-              ))}
-            </div>
-          </div>
+    <section id="certifications" className="py-16 bg-dark-secondary relative overflow-hidden">
+      {/* Background accent elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+        <div className="absolute -top-20 -left-20 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+      </div>
+      
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Professional Certifications</h2>
+          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+          <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+            Credentials that validate my expertise in blockchain technologies and development
+          </p>
         </div>
         
-        <div className="mt-12 p-8 bg-blue-600 rounded-lg shadow-lg text-white text-center">
-          <h3 className="text-2xl font-bold mb-4">Educational Background</h3>
-          <div className="inline-block bg-white/10 rounded-lg p-6 backdrop-blur-sm">
-            <div className="text-5xl mb-4">🎓</div>
-            <h4 className="text-xl font-bold">IT Technician</h4>
-            <p className="opacity-90">IACC University, Santiago, Chile</p>
-            <p className="text-sm opacity-80 mt-1">Graduated in 2013</p>
-          </div>
-        </div>
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid md:grid-cols-2 gap-8"
+        >
+          {certifications.map((cert) => (
+            <motion.div
+              key={cert.id}
+              variants={itemVariants}
+              className="bg-dark-card rounded-xl overflow-hidden shadow-lg border border-dark-border hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="relative h-48 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-purple-600/20 z-10"></div>
+                {cert.image ? (
+                  <img 
+                    src={cert.image} 
+                    alt={cert.title} 
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-tr from-blue-600/50 to-purple-600/50 flex items-center justify-center">
+                    <span className="text-white text-4xl font-bold">{cert.title.split(' ').map(word => word[0]).join('')}</span>
+                  </div>
+                )}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent h-24 z-20"></div>
+                <div className="absolute bottom-3 right-3 px-3 py-1 bg-blue-600 text-white text-sm rounded-full z-30">
+                  {cert.date}
+                </div>
+              </div>
+              
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-gray-200 mb-2">{cert.title}</h3>
+                <p className="text-blue-400 mb-4">Issued by {cert.issuer}</p>
+                
+                <p className="text-gray-400 mb-6">{cert.description}</p>
+                
+                <div className="flex flex-wrap gap-2">
+                  {cert.skills.map((skill, index) => (
+                    <span 
+                      key={index} 
+                      className="px-3 py-1 bg-dark-primary text-gray-400 text-sm rounded-full"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="mt-6 pt-4 border-t border-dark-border">
+                  <a 
+                    href="#" 
+                    className="flex items-center text-blue-400 hover:text-blue-300 transition-colors"
+                  >
+                    <span>View Certificate</span>
+                    <svg className="ml-2 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

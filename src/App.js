@@ -10,9 +10,25 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import LoadingScreen from './components/LoadingScreen';
 
 function App() {
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
+  const [isLoading, setIsLoading] = useState(true);
+  
+  // Set dark mode class on document
+  useEffect(() => {
+    // Always use dark mode
+    document.documentElement.classList.add('dark');
+  }, []);
+
+  // Simulate loading time
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
   
   // Smooth scrolling for anchor links
   useEffect(() => {
@@ -61,87 +77,90 @@ function App() {
   }, []);
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div 
-        className="font-sans bg-gray-50 text-gray-900"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <Navbar />
-        <main>
-          <Hero />
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <About />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <Skills />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <Experience />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <Projects />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <Certifications />
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <Contact />
-          </motion.div>
-        </main>
-        <Footer />
+    <>
+      <LoadingScreen isLoading={isLoading} />
+      <AnimatePresence mode="wait">
+        <motion.div 
+          className="font-sans dark min-h-screen"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Navbar />
+          <main>
+            <Hero />
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <About />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <Skills />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <Experience />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <Projects />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <Certifications />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8 }}
+            >
+              <Contact />
+            </motion.div>
+          </main>
+          <Footer />
 
-        {/* Animated cursor follower */}
-        <motion.div
-          className="fixed w-6 h-6 rounded-full bg-blue-500 opacity-30 pointer-events-none z-50 hidden md:block"
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.3, 0.1, 0.3],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          style={{
-            left: mousePosition.x,
-            top: mousePosition.y,
-            mixBlendMode: "lighten"
-          }}
-        />
-      </motion.div>
-    </AnimatePresence>
+          {/* Animated cursor follower */}
+          <motion.div
+            className="fixed w-6 h-6 rounded-full bg-blue-500 opacity-30 pointer-events-none z-50 hidden md:block"
+            animate={{
+              scale: [1, 1.5, 1],
+              opacity: [0.3, 0.1, 0.3],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+            style={{
+              left: mousePosition.x,
+              top: mousePosition.y,
+              mixBlendMode: "lighten"
+            }}
+          />
+        </motion.div>
+      </AnimatePresence>
+    </>
   );
 }
 

@@ -1,87 +1,128 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const About = () => {
   return (
-    <section id="about" className="py-20 bg-white">
+    <section id="about" className="py-16 bg-dark-primary">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="section-heading">About Carlos</h2>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">About Me</h2>
+          <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
+        </div>
         
-        <div className="mt-12 grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-6">
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Carlos Baeza Negroni is a Chilean blockchain engineer and certified smart contract developer with extensive experience in the cryptocurrency and decentralized finance (DeFi) ecosystem. With a strong foundation in IT and a passion for blockchain technology, Carlos has positioned himself as a respected expert in the field.
-            </p>
-            
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Throughout his career, Carlos has worked with major organizations like RealT LLC, where he developed Ethereum smart contracts and created internal tools for accounting, compliance, and operations. His expertise spans across multiple blockchain networks including Ethereum, BSC, Solana, Avalanche, and more.
-            </p>
-            
-            <p className="text-lg text-gray-700 leading-relaxed">
-              Carlos is known for his innovative approach to blockchain solutions, having developed projects like Pulsechain Faucets, Black Arrow Futures, and the Condor Blockchain. He's also been interviewed by respected industry publications like Cointelegraph and Criptonoticias about his work on stablecoins pegged to the Chilean peso.
-            </p>
-            
-            <div className="flex flex-wrap gap-4 pt-4">
-              <div className="flex items-center">
-                <span className="font-bold mr-2">Nationality:</span>
-                <span>Chilean</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-bold mr-2">Education:</span>
-                <span>IT Technician, IACC University</span>
-              </div>
-              <div className="flex items-center">
-                <span className="font-bold mr-2">Graduation:</span>
-                <span>2013</span>
-              </div>
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left side - Image column */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="relative"
+          >
+            <div className="relative max-w-md mx-auto">
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600 to-purple-600 rounded-2xl transform rotate-6 scale-105 opacity-30 animate-pulse"></div>
+              <img 
+                src="/images/profile.jpg" 
+                alt="Carlos Baeza" 
+                className="rounded-2xl shadow-2xl relative z-10 border-2 border-dark-accent"
+                style={{ maxHeight: '500px', objectFit: 'cover' }} 
+              />
+              
+              {/* Experience badge */}
+              <motion.div 
+                initial={{ scale: 0, y: 50 }}
+                whileInView={{ scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="absolute -bottom-5 -right-5 bg-dark-card py-4 px-6 rounded-lg shadow-xl border-2 border-dark-accent z-20"
+              >
+                <span className="block text-center text-gray-200 font-medium">Over</span>
+                <span className="block text-center text-blue-500 text-3xl font-bold">10</span>
+                <span className="block text-center text-gray-200 font-medium">Years Experience</span>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
           
+          {/* Right side - Content column */}
           <div className="space-y-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-blue-600 rounded-lg transform rotate-3"></div>
-              <div className="relative bg-white p-6 rounded-lg shadow-lg border border-gray-200 z-10">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Professional Summary</h3>
-                
-                <ul className="space-y-3">
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-blue-600 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="text-gray-700">Over 10 years of experience in software development with strong focus on blockchain technology since 2020</span>
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-blue-600 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="text-gray-700">Certified Smart Contract Developer and Professional Scrum Master (PSM-1)</span>
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-blue-600 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="text-gray-700">Participant in multiple ETHGlobal hackathons, showcasing innovative blockchain solutions</span>
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-blue-600 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="text-gray-700">Published author with expertise in WordPress multisite deployment on Nginx/Ubuntu</span>
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-blue-600 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="text-gray-700">Developer of multiple blockchain projects including stablecoins, NFTs, and DeFi platforms</span>
-                  </li>
-                  <li className="flex items-start">
-                    <svg className="w-5 h-5 text-blue-600 mt-1 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span className="text-gray-700">Currently focused on Bitcoin, Lightning Network, Taproot Assets, and self-sovereignty solutions</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+            <motion.h3 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-2xl font-bold text-gray-100"
+            >
+              Blockchain Developer & Smart Contract Specialist
+            </motion.h3>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-gray-400 leading-relaxed"
+            >
+              I'm a passionate blockchain developer with extensive experience in building decentralized applications
+              and smart contract systems. My journey in the world of blockchain began in 2013 when I first discovered
+              Bitcoin and became fascinated by its revolutionary technology.
+            </motion.p>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-gray-400 leading-relaxed"
+            >
+              With over 10 years of software development experience and 7+ years focusing exclusively on blockchain
+              technology, I've helped numerous projects implement secure, efficient, and innovative blockchain solutions.
+              My expertise spans from developing smart contracts and DeFi protocols to building comprehensive Web3
+              infrastructure.
+            </motion.p>
+            
+            {/* Stats Grid */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 my-8"
+            >
+              {[
+                { count: '50+', label: 'Projects Completed' },
+                { count: '25+', label: 'Smart Contracts' },
+                { count: '15+', label: 'DeFi Protocols' },
+                { count: '30+', label: 'Happy Clients' }
+              ].map((stat, index) => (
+                <div key={index} className="text-center p-4 bg-dark-card rounded-lg shadow-lg border border-dark-border">
+                  <div className="text-3xl font-bold text-blue-500 mb-2">{stat.count}</div>
+                  <div className="text-sm text-gray-400">{stat.label}</div>
+                </div>
+              ))}
+            </motion.div>
+            
+            {/* CTA Buttons */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="flex flex-wrap gap-4 mt-8"
+            >
+              <a 
+                href="#contact" 
+                className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition duration-300"
+              >
+                Get in Touch
+              </a>
+              <a 
+                href="/files/carlos_baeza_resume.pdf" 
+                download 
+                className="px-6 py-3 bg-dark-card text-blue-400 font-medium rounded-lg border border-blue-600 hover:bg-dark-primary transition duration-300"
+              >
+                Download Resume
+              </a>
+            </motion.div>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend
+  RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend, Cell
 } from 'recharts';
 
 const Skills = () => {
@@ -170,7 +170,7 @@ const Skills = () => {
         <motion.div 
           key={index} 
           variants={itemVariants}
-          className="card hover:border-blue-500 border-2 border-transparent p-6 backdrop-blur-sm bg-white/90"
+          className="card hover:border-blue-500 border-2 border-gray-800 p-6 backdrop-blur-sm bg-dark-card"
           whileHover={{ 
             scale: 1.03, 
             boxShadow: "0 10px 25px -5px rgba(59, 130, 246, 0.3)"
@@ -179,7 +179,7 @@ const Skills = () => {
         >
           <div className="flex items-center mb-4">
             {category.icon}
-            <h3 className="text-xl font-bold ml-3">{category.title}</h3>
+            <h3 className="text-xl font-bold ml-3 text-gray-200">{category.title}</h3>
           </div>
           
           <div className="flex flex-wrap">
@@ -203,62 +203,49 @@ const Skills = () => {
       variants={containerVariants}
       initial="hidden"
       animate={inView ? "visible" : "hidden"}
-      className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+      className="grid grid-cols-1 lg:grid-cols-3 gap-8"
     >
       <motion.div 
         variants={itemVariants} 
-        className="card p-6 backdrop-blur-sm bg-white/90"
+        className="card p-6 backdrop-blur-sm bg-dark-card"
       >
-        <h3 className="text-xl font-bold mb-4">Blockchain Expertise</h3>
+        <h3 className="text-xl font-bold mb-4 text-gray-200">Programming Languages</h3>
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={blockchainSkillsData} layout="vertical">
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number" domain={[0, 100]} />
-            <YAxis dataKey="name" type="category" width={100} />
-            <Tooltip formatter={(value) => [`${value}%`, 'Proficiency']} />
+          <BarChart data={languageSkillsData} layout="vertical">
+            <CartesianGrid strokeDasharray="3 3" stroke="#333" />
+            <XAxis type="number" domain={[0, 100]} tick={{fill: '#9ca3af'}} />
+            <YAxis dataKey="name" type="category" tick={{fill: '#9ca3af'}} />
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: '#1e1e1e', 
+                border: '1px solid #333',
+                color: '#f3f4f6'
+              }} 
+            />
             <Bar 
               dataKey="value" 
               fill="#3B82F6" 
               animationDuration={2000}
-              animationEasing="ease-out"
-              radius={[0, 4, 4, 0]}
-            />
+              label={{ position: 'right', fill: '#f3f4f6' }}
+            >
+              {languageSkillsData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={`#${Math.floor(Math.random()*16777215).toString(16)}`} />
+              ))}
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </motion.div>
-
+      
       <motion.div 
         variants={itemVariants} 
-        className="card p-6 backdrop-blur-sm bg-white/90"
+        className="card p-6 backdrop-blur-sm bg-dark-card lg:col-span-2"
       >
-        <h3 className="text-xl font-bold mb-4">Programming Languages</h3>
-        <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={languageSkillsData} layout="vertical">
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis type="number" domain={[0, 100]} />
-            <YAxis dataKey="name" type="category" width={100} />
-            <Tooltip formatter={(value) => [`${value}%`, 'Proficiency']} />
-            <Bar 
-              dataKey="value" 
-              fill="#8B5CF6" 
-              animationDuration={2000}
-              animationEasing="ease-out"
-              radius={[0, 4, 4, 0]}
-            />
-          </BarChart>
-        </ResponsiveContainer>
-      </motion.div>
-
-      <motion.div 
-        variants={itemVariants} 
-        className="card p-6 backdrop-blur-sm bg-white/90 lg:col-span-2"
-      >
-        <h3 className="text-xl font-bold mb-4">Full Stack Development Skills</h3>
+        <h3 className="text-xl font-bold mb-4 text-gray-200">Full Stack Development Skills</h3>
         <ResponsiveContainer width="100%" height={400}>
           <RadarChart outerRadius={150} data={fullStackSkillsData}>
-            <PolarGrid />
-            <PolarAngleAxis dataKey="subject" />
-            <PolarRadiusAxis angle={30} domain={[0, 100]} />
+            <PolarGrid stroke="#333" />
+            <PolarAngleAxis dataKey="subject" tick={{fill: '#9ca3af'}} />
+            <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{fill: '#9ca3af'}} />
             <Radar 
               name="Skills" 
               dataKey="A" 
@@ -268,7 +255,16 @@ const Skills = () => {
               animationDuration={2000}
               animationEasing="ease-out"
             />
-            <Legend />
+            <Legend formatter={() => (
+              <span style={{ color: '#f3f4f6' }}>Proficiency Level</span>
+            )}/>
+            <Tooltip 
+              contentStyle={{ 
+                backgroundColor: '#1e1e1e', 
+                border: '1px solid #333',
+                color: '#f3f4f6'
+              }} 
+            />
           </RadarChart>
         </ResponsiveContainer>
       </motion.div>
