@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -8,6 +8,404 @@ const Experience = () => {
   const [ref2, inView2] = useInView({ triggerOnce: true, threshold: 0.2 });
   const [ref3, inView3] = useInView({ triggerOnce: true, threshold: 0.2 });
   const [ref4, inView4] = useInView({ triggerOnce: true, threshold: 0.2 });
+  
+  // Ref for the canvas background
+  const canvasRef = useRef(null);
+  
+  // Canvas animation for floating cubes
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    
+    const cubes = [];
+    const cubeCount = 35;
+    
+    // Color palettes for a more cohesive look
+    const colorPalettes = [
+      ['rgba(30, 64, 175, 0.15)', 'rgba(79, 70, 229, 0.15)', 'rgba(91, 33, 182, 0.15)'], // Blue-purple
+      ['rgba(6, 95, 70, 0.15)', 'rgba(16, 185, 129, 0.15)', 'rgba(5, 150, 105, 0.15)'], // Green
+      ['rgba(124, 58, 237, 0.15)', 'rgba(139, 92, 246, 0.15)', 'rgba(91, 33, 182, 0.15)'] // Purple
+    ];
+    
+    // Create cubes with different properties
+    for (let i = 0; i < cubeCount; i++) {
+      const paletteIndex = Math.floor(Math.random() * colorPalettes.length);
+      const colorIndex = Math.floor(Math.random() * colorPalettes[paletteIndex].length);
+      
+      // Determine cube type with probabilities
+      let type;
+      const typeRandom = Math.random();
+      if (typeRandom < 0.4) {
+        type = 'cube';
+      } else if (typeRandom < 0.7) {
+        type = 'block';
+      } else if (typeRandom < 0.85) {
+        type = 'pyramid';
+      } else {
+        type = 'prism';
+      }
+      
+      cubes.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 35 + 8,
+        speedX: Math.random() * 0.3 - 0.15,
+        speedY: Math.random() * 0.3 - 0.15,
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeedX: (Math.random() * 0.01 - 0.005) * (Math.random() > 0.5 ? 1 : -1),
+        rotationSpeedY: (Math.random() * 0.01 - 0.005) * (Math.random() > 0.5 ? 1 : -1),
+        rotationSpeedZ: (Math.random() * 0.005 - 0.0025) * (Math.random() > 0.5 ? 1 : -1),
+        color: colorPalettes[paletteIndex][colorIndex],
+        glowIntensity: Math.random() * 0.4 + 0.1,
+        phase: Math.random() * Math.PI * 2, // For animation variation
+        type: type,
+        depth: Math.random() * 0.5 + 0.2 // 3D depth factor
+      });
+    }
+    
+    // Draw a cube with enhanced 3D perspective
+    function drawCube(x, y, size, rotation, rotX, rotY, color, glowIntensity, highlightEffect) {
+      const depth = size * 0.5; // Depth of the cube
+      
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotation);
+      
+      // Glow effect based on intensity
+      if (glowIntensity > 0) {
+        ctx.shadowColor = color.replace('rgba', 'rgb').replace(/[^,]+(?=\))/, '1');
+        ctx.shadowBlur = 10 * glowIntensity;
+      }
+      
+      // Interactive highlight for cubes near mouse
+      const opacity = highlightEffect ? 0.8 + (highlightEffect * 0.2) : 0.8;
+      
+      // Front face with more depth perception based on rotations
+      ctx.fillStyle = color.replace(')', `, ${opacity})`).replace('rgba', 'rgba');
+      ctx.strokeStyle = 'rgba(160, 190, 255, 0.4)';
+      ctx.lineWidth = 1;
+      
+      // Calculate corners based on rotation for better 3D effect
+      const frontZ = Math.sin(rotX) * size/2;
+      const depthFactor = Math.cos(rotY) * 0.5 + 0.5;
+      
+      // Draw front face
+      ctx.beginPath();
+      ctx.rect(-size/2, -size/2, size, size);
+      ctx.fill();
+      ctx.stroke();
+      
+      // Top face with rotation effect
+      ctx.fillStyle = color.replace(')', `, ${opacity * 0.85})`).replace('rgba', 'rgba');
+      ctx.beginPath();
+      ctx.moveTo(-size/2, -size/2);
+      ctx.lineTo(-size/2 + size/4 * depthFactor, -size/2 - size/4 * depthFactor);
+      ctx.lineTo(size/2 + size/4 * depthFactor, -size/2 - size/4 * depthFactor);
+      ctx.lineTo(size/2, -size/2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      
+      // Right face with dynamic shading
+      ctx.fillStyle = color.replace(')', `, ${opacity * 0.7})`).replace('rgba', 'rgba');
+      ctx.beginPath();
+      ctx.moveTo(size/2, -size/2);
+      ctx.lineTo(size/2 + size/4 * depthFactor, -size/2 - size/4 * depthFactor);
+      ctx.lineTo(size/2 + size/4 * depthFactor, size/2 - size/4 * depthFactor);
+      ctx.lineTo(size/2, size/2);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      
+      // Add wireframe detail for highlight effect
+      if (highlightEffect > 0.3) {
+        ctx.strokeStyle = 'rgba(200, 230, 255, 0.6)';
+        ctx.beginPath();
+        ctx.moveTo(-size/2, 0);
+        ctx.lineTo(size/2, 0);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(0, -size/2);
+        ctx.lineTo(0, size/2);
+        ctx.stroke();
+      }
+      
+      ctx.restore();
+    }
+    
+    // Draw a block with inner detail
+    function drawBlock(x, y, size, rotation, color, glowIntensity, highlightEffect) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotation);
+      
+      // Glow effect
+      if (glowIntensity > 0.2) {
+        ctx.shadowColor = color.replace('rgba', 'rgb').replace(/[^,]+(?=\))/, '1');
+        ctx.shadowBlur = 8 * glowIntensity;
+      }
+      
+      // Interactive highlight
+      const opacity = highlightEffect ? 0.9 + (highlightEffect * 0.1) : 0.9;
+      
+      // Draw base rectangle
+      ctx.fillStyle = color.replace(')', `, ${opacity})`).replace('rgba', 'rgba');
+      ctx.strokeStyle = 'rgba(120, 170, 255, 0.5)';
+      ctx.lineWidth = 1;
+      
+      ctx.beginPath();
+      ctx.rect(-size/2, -size/2, size, size);
+      ctx.fill();
+      ctx.stroke();
+      
+      // Enhanced inner details
+      if (highlightEffect > 0) {
+        // Circuit-like patterns for tech feel when highlighted
+        ctx.strokeStyle = 'rgba(180, 210, 255, 0.4)';
+        ctx.lineWidth = 0.5;
+        
+        // Horizontal lines
+        ctx.beginPath();
+        ctx.moveTo(-size/2, -size/4);
+        ctx.lineTo(size/2, -size/4);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(-size/2, 0);
+        ctx.lineTo(size/2, 0);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(-size/2, size/4);
+        ctx.lineTo(size/2, size/4);
+        ctx.stroke();
+        
+        // Vertical lines
+        ctx.beginPath();
+        ctx.moveTo(-size/4, -size/2);
+        ctx.lineTo(-size/4, size/2);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(0, -size/2);
+        ctx.lineTo(0, size/2);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(size/4, -size/2);
+        ctx.lineTo(size/4, size/2);
+        ctx.stroke();
+        
+        // Add corner dots for circuit-board effect
+        ctx.fillStyle = 'rgba(200, 230, 255, 0.6)';
+        
+        ctx.beginPath();
+        ctx.arc(-size/4, -size/4, 1, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(size/4, -size/4, 1, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(-size/4, size/4, 1, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.beginPath();
+        ctx.arc(size/4, size/4, 1, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        // Standard detail lines when not highlighted
+        ctx.strokeStyle = 'rgba(180, 210, 255, 0.15)';
+        ctx.lineWidth = 0.5;
+        
+        // Horizontal line
+        ctx.beginPath();
+        ctx.moveTo(-size/2, 0);
+        ctx.lineTo(size/2, 0);
+        ctx.stroke();
+        
+        // Vertical line
+        ctx.beginPath();
+        ctx.moveTo(0, -size/2);
+        ctx.lineTo(0, size/2);
+        ctx.stroke();
+      }
+      
+      ctx.restore();
+    }
+    
+    // Draw a pyramid
+    function drawPyramid(x, y, size, rotation, color, glowIntensity, highlightEffect) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotation);
+      
+      // Glow effect
+      if (glowIntensity > 0) {
+        ctx.shadowColor = color.replace('rgba', 'rgb').replace(/[^,]+(?=\))/, '1');
+        ctx.shadowBlur = 10 * glowIntensity;
+      }
+      
+      // Interactive highlight
+      const opacity = highlightEffect ? 0.9 + (highlightEffect * 0.1) : 0.9;
+      
+      // Calculate the height of the pyramid
+      const height = size * 0.866; // height of equilateral triangle
+      
+      // Base (triangle)
+      ctx.fillStyle = color.replace(')', `, ${opacity})`).replace('rgba', 'rgba');
+      ctx.strokeStyle = 'rgba(160, 190, 255, 0.4)';
+      ctx.lineWidth = 1;
+      
+      ctx.beginPath();
+      ctx.moveTo(0, -height/2);  // top
+      ctx.lineTo(-size/2, height/2);  // bottom left
+      ctx.lineTo(size/2, height/2);  // bottom right
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      
+      // If highlighted, add more detail
+      if (highlightEffect > 0.3) {
+        ctx.strokeStyle = 'rgba(200, 230, 255, 0.6)';
+        ctx.beginPath();
+        ctx.moveTo(0, -height/2);
+        ctx.lineTo(0, height/2);
+        ctx.stroke();
+      }
+      
+      ctx.restore();
+    }
+    
+    // Draw a prism
+    function drawPrism(x, y, size, rotation, color, glowIntensity, highlightEffect) {
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(rotation);
+      
+      // Glow effect
+      if (glowIntensity > 0) {
+        ctx.shadowColor = color.replace('rgba', 'rgb').replace(/[^,]+(?=\))/, '1');
+        ctx.shadowBlur = 10 * glowIntensity;
+      }
+      
+      // Interactive highlight
+      const opacity = highlightEffect ? 0.9 + (highlightEffect * 0.1) : 0.9;
+      
+      // Draw octagon
+      ctx.fillStyle = color.replace(')', `, ${opacity})`).replace('rgba', 'rgba');
+      ctx.strokeStyle = 'rgba(160, 190, 255, 0.4)';
+      ctx.lineWidth = 1;
+      
+      const sides = 6;
+      const a = (Math.PI * 2) / sides;
+      
+      ctx.beginPath();
+      for (let i = 0; i < sides; i++) {
+        const x = size/2 * Math.cos(a * i);
+        const y = size/2 * Math.sin(a * i);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+      
+      // If highlighted, add more detail
+      if (highlightEffect > 0.3) {
+        ctx.strokeStyle = 'rgba(200, 230, 255, 0.6)';
+        ctx.beginPath();
+        ctx.moveTo(-size/2, 0);
+        ctx.lineTo(size/2, 0);
+        ctx.stroke();
+        
+        ctx.beginPath();
+        ctx.moveTo(0, -size/2);
+        ctx.lineTo(0, size/2);
+        ctx.stroke();
+      }
+      
+      ctx.restore();
+    }
+    
+    // Animation function
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Calculate pulse effect based on time
+      const time = Date.now() / 1000;
+      const pulse = (Math.sin(time) + 1) / 2; // 0 to 1 pulse
+      
+      cubes.forEach(cube => {
+        // Update rotation
+        cube.rotation += cube.rotationSpeedZ;
+        
+        // Individual time-based pulse effect
+        const individualPulse = (Math.sin(time + cube.phase) + 1) / 2;
+        
+        // Update 3D rotation values for more depth
+        const rotX = time * cube.rotationSpeedX;
+        const rotY = time * cube.rotationSpeedY;
+        
+        // Draw different types of geometric elements with highlight effect based on time only
+        const highlightEffect = individualPulse * 0.2;
+        const glowStrength = cube.glowIntensity * (0.8 + pulse * 0.5);
+        
+        if (cube.type === 'cube') {
+          drawCube(cube.x, cube.y, cube.size, cube.rotation, rotX, rotY, cube.color, glowStrength, highlightEffect);
+        } else if (cube.type === 'block') {
+          drawBlock(cube.x, cube.y, cube.size, cube.rotation, cube.color, glowStrength, highlightEffect);
+        } else if (cube.type === 'pyramid') {
+          drawPyramid(cube.x, cube.y, cube.size, cube.rotation, cube.color, glowStrength, highlightEffect);
+        } else if (cube.type === 'prism') {
+          drawPrism(cube.x, cube.y, cube.size, cube.rotation, cube.color, glowStrength, highlightEffect);
+        }
+        
+        // Update position
+        cube.x += cube.speedX;
+        cube.y += cube.speedY;
+        
+        // Boundary check with bounce effect
+        if (cube.x < cube.size/2 || cube.x > canvas.width - cube.size/2) {
+          cube.speedX *= -1;
+          // Add a slight random variation on bounce
+          cube.speedX += (Math.random() * 0.1 - 0.05);
+        }
+        
+        if (cube.y < cube.size/2 || cube.y > canvas.height - cube.size/2) {
+          cube.speedY *= -1;
+          // Add a slight random variation on bounce
+          cube.speedY += (Math.random() * 0.1 - 0.05);
+        }
+        
+        // Keep speed within bounds
+        cube.speedX = Math.max(Math.min(cube.speedX, 0.5), -0.5);
+        cube.speedY = Math.max(Math.min(cube.speedY, 0.5), -0.5);
+      });
+      
+      requestAnimationFrame(animate);
+    }
+    
+    animate();
+    
+    // Resize handler
+    const handleResize = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    };
+    
+    window.addEventListener('resize', handleResize);
+    
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   
   const experiences = [
     {
@@ -77,26 +475,57 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-20 relative overflow-hidden">
-      {/* Enhanced background with gradients and animated elements */}
+    <section 
+      id="experience" 
+      className="py-20 relative overflow-hidden"
+    >
+      {/* Canvas for cube animation */}
+      <canvas 
+        ref={canvasRef} 
+        className="absolute inset-0 w-full h-full z-0 pointer-events-none"
+      ></canvas>
+      
+      {/* Enhanced background with geometric patterns */}
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-dark-secondary to-blue-900/20 z-0"></div>
       
-      {/* Mesh gradient background */}
-      <div className="absolute inset-0 opacity-20 z-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-indigo-700/20 via-transparent to-transparent"></div>
-        <div className="absolute bottom-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-purple-700/20 via-transparent to-transparent"></div>
+      {/* Animated geometric blocks */}
+      <div className="absolute inset-0 overflow-hidden z-0">
+        <div className="geometric-blocks">
+          {[...Array(5)].map((_, i) => (
+            <div 
+              key={i}
+              className="geo-block"
+              style={{
+                '--delay': `${i * 5}s`,
+                '--duration': `${20 + i * 5}s`,
+                '--size': `${60 + i * 15}px`,
+                '--x': `${i * 20}%`,
+                '--rotate': `${i * 45}deg`,
+                '--opacity': `${0.03 + i * 0.01}`
+              }}
+            >
+              {/* Inner grid lines for blocks */}
+              <div className="geo-block-grid"></div>
+            </div>
+          ))}
+        </div>
       </div>
       
-      {/* Animated particles/circles */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none z-0">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mix-blend-overlay filter blur-3xl opacity-40 animate-pulse"></div>
-        <div className="absolute top-3/4 left-1/4 w-64 h-64 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full mix-blend-overlay filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full mix-blend-overlay filter blur-3xl opacity-40 animate-pulse" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 right-1/4 w-72 h-72 bg-gradient-to-r from-blue-600 to-cyan-600 rounded-full mix-blend-overlay filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '3s' }}></div>
-      </div>
-      
-      {/* Subtle grid pattern overlay */}
+      {/* Animated grid pattern */}
       <div className="absolute inset-0 bg-grid-pattern opacity-5 z-0"></div>
+      
+      {/* Floating cube decorations with enhanced 3D effect */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-15 pointer-events-none z-0">
+        <div className="absolute top-1/4 left-10 w-16 h-16 cube-3d" style={{ '--cube-color': 'rgba(37, 99, 235, 0.2)', '--cube-duration': '15s' }}></div>
+        <div className="absolute bottom-1/3 right-20 w-24 h-24 cube-3d" style={{ '--cube-color': 'rgba(139, 92, 246, 0.2)', '--cube-duration': '20s', '--cube-delay': '2s' }}></div>
+        <div className="absolute top-1/2 right-1/4 w-20 h-20 cube-3d" style={{ '--cube-color': 'rgba(79, 70, 229, 0.2)', '--cube-duration': '18s', '--cube-delay': '5s' }}></div>
+        <div className="absolute bottom-1/4 left-1/3 w-12 h-12 cube-3d" style={{ '--cube-color': 'rgba(6, 182, 212, 0.2)', '--cube-duration': '12s', '--cube-delay': '3s' }}></div>
+      </div>
+      
+      {/* 3D Cubic grid structures */}
+      <div className="absolute bottom-0 right-0 w-full h-40 overflow-hidden opacity-10 z-0">
+        <div className="cube-grid"></div>
+      </div>
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
         <motion.div 
@@ -114,9 +543,24 @@ const Experience = () => {
         </motion.div>
         
         <div className="relative mx-auto max-w-5xl">
-          {/* Timeline Line with animated gradient */}
+          {/* Timeline Line with cubic segments */}
           <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-600 via-indigo-600 to-purple-600 z-0 rounded-full">
             <div className="absolute inset-0 bg-gradient-to-b from-blue-600 via-indigo-600 to-purple-600 animate-pulse opacity-70 rounded-full"></div>
+            
+            {/* Enhanced cubic segments along timeline */}
+            {[...Array(8)].map((_, i) => (
+              <div 
+                key={i}
+                className="absolute w-3 h-3 border border-blue-400/50 left-1/2 transform -translate-x-1/2 bg-dark-background opacity-80"
+                style={{ 
+                  top: `${i * 12.5}%`, 
+                  transform: 'translateX(-50%) rotate(45deg)',
+                  animation: `float-mini ${3 + i % 2}s infinite ease-in-out alternate`,
+                  animationDelay: `${i * 0.5}s`,
+                  boxShadow: 'inset 0 0 5px rgba(59, 130, 246, 0.3), 0 0 5px rgba(59, 130, 246, 0.3)'
+                }}
+              ></div>
+            ))}
           </div>
           
           {/* Timeline Items */}
