@@ -75,8 +75,8 @@ const Hackathons = () => {
     visible: { 
       opacity: 1,
       transition: { 
-        staggerChildren: 0.2,
-        delayChildren: 0.3
+        staggerChildren: 0.15,
+        delayChildren: 0.2
       }
     }
   };
@@ -86,57 +86,75 @@ const Hackathons = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { type: 'spring', stiffness: 100 }
+      transition: { type: 'spring', stiffness: 100, damping: 10 }
     }
   };
 
-  // Custom hackathon icons
-  const hackathonIcon = (
-    <svg className="w-full h-full object-contain p-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="24" height="24" fill="url(#hackathonGrad)" rx="12" />
+  // SVG Icons with improved design
+  const ethGlobalIcon = (
+    <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="6" fill="url(#ethGlobalGrad)" />
+      <defs>
+        <linearGradient id="ethGlobalGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#4F46E5" />
+          <stop offset="1" stopColor="#7C3AED" />
+        </linearGradient>
+      </defs>
+      <path d="M12 5L6.5 12L12 14.5L17.5 12L12 5Z" fill="white" fillOpacity="0.9" />
+      <path d="M12 14.5L6.5 12L12 19L17.5 12L12 14.5Z" fill="white" fillOpacity="0.7" />
+      <path d="M12 5L6.5 12L12 14.5L17.5 12L12 5Z" stroke="white" strokeOpacity="0.5" strokeWidth="0.3" />
+      <path d="M12 14.5L6.5 12L12 19L17.5 12L12 14.5Z" stroke="white" strokeOpacity="0.3" strokeWidth="0.3" />
+    </svg>
+  );
+
+  const celoIcon = (
+    <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="6" fill="url(#celoGrad)" />
+      <defs>
+        <linearGradient id="celoGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#35D07F" />
+          <stop offset="1" stopColor="#2DB168" />
+        </linearGradient>
+      </defs>
+      <circle cx="12" cy="12" r="6" stroke="white" strokeWidth="1.5" fill="none" />
+      <path d="M9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12" fill="none" stroke="white" strokeWidth="1.5" />
+      <path d="M9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12" fill="none" stroke="white" strokeWidth="1.5" />
+    </svg>
+  );
+
+  const defaultHackathonIcon = (
+    <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="24" height="24" rx="6" fill="url(#hackathonGrad)" />
       <defs>
         <linearGradient id="hackathonGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
           <stop stopColor="#6366F1" />
           <stop offset="1" stopColor="#EC4899" />
         </linearGradient>
       </defs>
-      <path d="M6 8H18V16H6V8Z" fill="none" stroke="white" strokeWidth="1.5" />
-      <path d="M8 5V8" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M16 5V8" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M8 16V19" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M16 16V19" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M10 12H14" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M12 10V14" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-
-  const ethGlobalIcon = (
-    <svg className="w-full h-full object-contain p-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="24" height="24" fill="url(#ethGlobalGrad)" rx="12" />
-      <defs>
-        <linearGradient id="ethGlobalGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#4338CA" />
-          <stop offset="1" stopColor="#3B82F6" />
-        </linearGradient>
-      </defs>
-      <path d="M12 4L6 12L12 15L18 12L12 4Z" fill="white" fillOpacity="0.9" />
-      <path d="M12 15L6 12L12 20L18 12L12 15Z" fill="white" fillOpacity="0.7" />
-      <circle cx="12" cy="12" r="8" stroke="white" strokeWidth="0.5" strokeDasharray="1 1" />
+      <rect x="7" y="8" width="10" height="8" rx="1" stroke="white" strokeWidth="1.5" fill="none" />
+      <path d="M9 6V8" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M15 6V8" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M9 16V18" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M15 16V18" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M10.5 12H13.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M12 10.5V13.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 
   // Helper function to get the right icon based on organizer
   const getHackathonIcon = (hackathon) => {
-    if (hackathon.organizer.toLowerCase().includes('ethglobal')) return ethGlobalIcon;
-    return hackathonIcon;
+    const org = hackathon.organizer.toLowerCase();
+    if (org.includes('ethglobal')) return ethGlobalIcon;
+    if (org.includes('celo')) return celoIcon;
+    return defaultHackathonIcon;
   };
 
   return (
     <section id="hackathons" className="py-20 relative overflow-hidden">
-      {/* Background with gradient */}
+      {/* Enhanced background with gradient and effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-950 to-indigo-900"></div>
       
-      {/* CSS Grid pattern */}
+      {/* Grid pattern with custom styling */}
       <div className="absolute inset-0 opacity-10" 
            style={{
              backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
@@ -144,15 +162,79 @@ const Hackathons = () => {
            }}>
       </div>
       
-      {/* Glowing orbs */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 right-10 w-64 h-64 bg-indigo-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse-slow"></div>
-        <div className="absolute bottom-1/3 left-10 w-72 h-72 bg-pink-400 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse-slow-delayed"></div>
-        <div className="absolute top-2/3 right-1/3 w-48 h-48 bg-purple-400 rounded-full mix-blend-screen filter blur-3xl opacity-[0.15] animate-float"></div>
+      {/* Improved ambient glow effects */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-1/4 right-1/5 w-64 h-64 bg-indigo-500 rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
+        <div className="absolute bottom-1/3 left-1/6 w-80 h-80 bg-pink-400 rounded-full mix-blend-screen filter blur-[100px] opacity-20"></div>
+        <div className="absolute top-2/3 right-1/3 w-48 h-48 bg-purple-500 rounded-full mix-blend-screen filter blur-[100px] opacity-15"></div>
+      </div>
+      
+      {/* Floating 3D cubes */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Cube 1 */}
+        <div className="cube-wrapper absolute top-[15%] left-[10%]">
+          <div className="cube">
+            <div className="cube-face front"></div>
+            <div className="cube-face back"></div>
+            <div className="cube-face right"></div>
+            <div className="cube-face left"></div>
+            <div className="cube-face top"></div>
+            <div className="cube-face bottom"></div>
+          </div>
+        </div>
+        
+        {/* Cube 2 */}
+        <div className="cube-wrapper absolute top-[60%] left-[75%]">
+          <div className="cube cube-2">
+            <div className="cube-face front"></div>
+            <div className="cube-face back"></div>
+            <div className="cube-face right"></div>
+            <div className="cube-face left"></div>
+            <div className="cube-face top"></div>
+            <div className="cube-face bottom"></div>
+          </div>
+        </div>
+        
+        {/* Cube 3 */}
+        <div className="cube-wrapper absolute top-[75%] left-[20%]">
+          <div className="cube cube-3">
+            <div className="cube-face front"></div>
+            <div className="cube-face back"></div>
+            <div className="cube-face right"></div>
+            <div className="cube-face left"></div>
+            <div className="cube-face top"></div>
+            <div className="cube-face bottom"></div>
+          </div>
+        </div>
+        
+        {/* Cube 4 - smaller */}
+        <div className="cube-wrapper absolute top-[25%] left-[85%] scale-75">
+          <div className="cube cube-4">
+            <div className="cube-face front"></div>
+            <div className="cube-face back"></div>
+            <div className="cube-face right"></div>
+            <div className="cube-face left"></div>
+            <div className="cube-face top"></div>
+            <div className="cube-face bottom"></div>
+          </div>
+        </div>
+        
+        {/* Wireframe cube */}
+        <div className="cube-wrapper absolute top-[40%] left-[50%] scale-150">
+          <div className="wireframe-cube">
+            <div className="wireframe-face front"></div>
+            <div className="wireframe-face back"></div>
+            <div className="wireframe-face right"></div>
+            <div className="wireframe-face left"></div>
+            <div className="wireframe-face top"></div>
+            <div className="wireframe-face bottom"></div>
+          </div>
+        </div>
       </div>
       
       {/* Content container */}
       <div className="container mx-auto px-4 md:px-6 relative z-10 max-w-6xl">
+        {/* Section heading with improved animation */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -160,76 +242,205 @@ const Hackathons = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient">Hackathons</h2>
-          <div className="w-32 h-1.5 bg-gradient-to-r from-indigo-600 to-pink-600 mx-auto rounded-full"></div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-purple-500">Hackathons</h2>
+          <div className="w-36 h-1.5 bg-gradient-to-r from-indigo-600 to-pink-600 mx-auto rounded-full"></div>
           <p className="text-gray-300 mt-6 max-w-2xl mx-auto text-lg">
             Participating in global blockchain hackathons to build innovative solutions and expand my Web3 expertise
           </p>
         </motion.div>
         
+        {/* Hackathon cards grid with improved layout */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {hackathons.map((hackathon) => (
             <motion.div
               key={hackathon.id}
               variants={itemVariants}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="bg-gradient-to-br from-dark-card to-dark-card/80 rounded-2xl overflow-hidden shadow-xl border border-dark-border/40 group transition-all duration-300 relative flex flex-col h-full"
+              whileHover={{ 
+                y: -8, 
+                transition: { duration: 0.3 },
+                boxShadow: "0 15px 30px -10px rgba(79, 70, 229, 0.4)"
+              }}
+              className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-lg overflow-hidden border border-indigo-900/30 shadow-lg hover:shadow-indigo-500/20 group transition-all duration-300 h-full flex flex-col"
             >
-              {/* Glowing border on hover */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-indigo-500/30 transition-all duration-500 opacity-0 group-hover:opacity-100 pointer-events-none"></div>
-              
-              {/* Card header with image */}
-              <div className="h-40 w-full relative overflow-hidden pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-tr from-indigo-900/30 to-pink-900/30 z-10 transition-all duration-300 group-hover:opacity-80"></div>
-                <div className="w-full h-full bg-gradient-to-tr from-gray-800 to-gray-900 flex items-center justify-center">
-                  {getHackathonIcon(hackathon)}
-                </div>
-                <div className="absolute bottom-0 left-0 w-full px-4 py-2 bg-gradient-to-t from-black/80 to-transparent">
-                  <div className="text-sm text-gray-300">{hackathon.date}</div>
-                </div>
-              </div>
-              
-              {/* Card content */}
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div className="pointer-events-auto">
-                  <div className="flex items-center mb-2">
-                    <span className="w-2 h-2 rounded-full bg-indigo-500 mr-2"></span>
-                    <p className="text-indigo-400 font-medium">{hackathon.organizer}</p>
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-white mb-3 group-hover:text-indigo-200 transition-colors">{hackathon.title}</h3>
-                  
-                  <p className="text-gray-400 text-sm mb-4">{hackathon.description}</p>
+              {/* Card header with improved visual design */}
+              <div className="relative overflow-hidden">
+                {/* Organization identifier tag */}
+                <div className="absolute top-0 right-0 px-2 py-1 bg-indigo-600/90 text-xs font-medium text-white rounded-bl-lg z-10">
+                  {hackathon.organizer}
                 </div>
                 
-                <div className="pointer-events-auto">
-                  <a 
-                    href={hackathon.url} 
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-indigo-400 text-sm hover:text-indigo-300 transition-colors flex items-center mt-2 relative z-20 cursor-pointer inline-block"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(hackathon.url, '_blank', 'noopener,noreferrer');
-                    }}
-                  >
-                    View Hackathon
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1 inline" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
+                {/* Icon background with gradient and pattern */}
+                <div className="h-28 bg-gradient-to-tr from-gray-800 to-gray-900 flex items-center justify-center relative">
+                  {/* Animated subtle pattern */}
+                  <div className="absolute inset-0 opacity-20" 
+                      style={{
+                        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)',
+                        backgroundSize: '20px 20px'
+                      }}>
+                  </div>
+                  
+                  {/* Hackathon icon with improved rendering */}
+                  <div className="w-16 h-16 transform group-hover:scale-110 transition-transform duration-300">
+                    {getHackathonIcon(hackathon)}
+                  </div>
+                  
+                  {/* Title overlay */}
+                  <div className="absolute bottom-0 left-0 w-full py-1.5 bg-gradient-to-t from-gray-900 to-transparent">
+                    <h3 className="text-base font-bold text-white text-center group-hover:text-indigo-300 transition-colors px-2">
+                      {hackathon.title}
+                    </h3>
+                  </div>
                 </div>
               </div>
+              
+              {/* Card content with improved typography and spacing */}
+              <div className="p-3 flex-1 flex flex-col">
+                {/* Date display in compact format */}
+                <div className="text-xs text-indigo-300 font-medium mb-2 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  {hackathon.date}
+                </div>
+                
+                <p className="text-xs text-gray-400 leading-tight mb-3 flex-grow line-clamp-3">
+                  {hackathon.description}
+                </p>
+                
+                {/* Improved action link */}
+                <a 
+                  href={hackathon.url} 
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center text-xs font-medium text-indigo-400 hover:text-indigo-300 transition-colors group-hover:text-indigo-300 mt-auto"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    window.open(hackathon.url, '_blank', 'noopener,noreferrer');
+                  }}
+                >
+                  View Hackathon
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+              
+              {/* Glowing border effect on hover */}
+              <div className="absolute inset-0 rounded-lg border-2 border-transparent group-hover:border-indigo-500/30 opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none"></div>
             </motion.div>
           ))}
         </motion.div>
       </div>
+      
+      {/* CSS for the 3D cubes */}
+      <style jsx>{`
+        .cube-wrapper {
+          perspective: 800px;
+          width: 100px;
+          height: 100px;
+          opacity: 0.15;
+          z-index: 1;
+        }
+        
+        .cube {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-style: preserve-3d;
+          animation: rotate 20s infinite linear;
+        }
+        
+        .cube-2 {
+          animation: rotate 25s infinite linear reverse;
+        }
+        
+        .cube-3 {
+          animation: float-rotate 18s infinite ease-in-out;
+        }
+        
+        .cube-4 {
+          animation: float-rotate 22s infinite ease-in-out reverse;
+        }
+        
+        .cube-face {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: rgba(99, 102, 241, 0.2);
+          border: 1px solid rgba(139, 92, 246, 0.3);
+          backface-visibility: visible;
+        }
+        
+        .front {
+          transform: translateZ(50px);
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(67, 56, 202, 0.1));
+        }
+        
+        .back {
+          transform: rotateY(180deg) translateZ(50px);
+          background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(67, 56, 202, 0.1));
+        }
+        
+        .right {
+          transform: rotateY(90deg) translateZ(50px);
+          background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(124, 58, 237, 0.1));
+        }
+        
+        .left {
+          transform: rotateY(-90deg) translateZ(50px);
+          background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(124, 58, 237, 0.1));
+        }
+        
+        .top {
+          transform: rotateX(90deg) translateZ(50px);
+          background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(167, 139, 250, 0.1));
+        }
+        
+        .bottom {
+          transform: rotateX(-90deg) translateZ(50px);
+          background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(167, 139, 250, 0.1));
+        }
+        
+        .wireframe-cube {
+          width: 100%;
+          height: 100%;
+          position: relative;
+          transform-style: preserve-3d;
+          animation: float-rotate-wire 30s infinite linear;
+        }
+        
+        .wireframe-face {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border: 1px solid rgba(139, 92, 246, 0.25);
+          background: transparent;
+        }
+        
+        @keyframes rotate {
+          0% { transform: rotateX(0) rotateY(0) rotateZ(0); }
+          100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+        }
+        
+        @keyframes float-rotate {
+          0% { transform: rotateX(0) rotateY(0) translateY(0); }
+          25% { transform: rotateX(90deg) rotateY(90deg) translateY(-20px); }
+          50% { transform: rotateX(180deg) rotateY(180deg) translateY(0); }
+          75% { transform: rotateX(270deg) rotateY(270deg) translateY(20px); }
+          100% { transform: rotateX(360deg) rotateY(360deg) translateY(0); }
+        }
+        
+        @keyframes float-rotate-wire {
+          0% { transform: rotateX(0) rotateY(0); }
+          100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+      `}</style>
     </section>
   );
 };
