@@ -34,7 +34,7 @@ const Navbar = () => {
     }`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
-          <a href="#" className="text-xl md:text-2xl font-bold text-blue-400 flex items-center">
+          <a href="#home" className="text-xl md:text-2xl font-bold text-blue-400 flex items-center">
             <img 
               src="http://carlos-baeza.com/avatar.jpg" 
               alt="Carlos Baeza" 

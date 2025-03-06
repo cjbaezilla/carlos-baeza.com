@@ -69,6 +69,7 @@ const Experience = () => {
     
     // Draw a cube with enhanced 3D perspective
     function drawCube(x, y, size, rotation, rotX, rotY, color, glowIntensity, highlightEffect) {
+      // eslint-disable-next-line no-unused-vars
       const depth = size * 0.5; // Depth of the cube
       
       ctx.save();
@@ -90,6 +91,7 @@ const Experience = () => {
       ctx.lineWidth = 1;
       
       // Calculate corners based on rotation for better 3D effect
+      // eslint-disable-next-line no-unused-vars
       const frontZ = Math.sin(rotX) * size/2;
       const depthFactor = Math.cos(rotY) * 0.5 + 0.5;
       

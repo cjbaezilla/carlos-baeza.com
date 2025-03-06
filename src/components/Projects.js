@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
 
 const Projects = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -7,7 +7,7 @@ const Projects = () => {
   const [filteredProjects, setFilteredProjects] = useState([]);
 
   // Project data with added facts
-  const projects = [
+  const projects = useMemo(() => [
     {
       title: "Pulsechain Faucets",
       description: "The Pulsechain Faucets NFT introduces a novel distributing mechanism for native unwrapped PLS inside the Pulsechain network.",
@@ -155,7 +155,7 @@ const Projects = () => {
         ]
       }
     },
-  ];
+  ], []);
 
   const filterCategories = [
     { id: 'all', label: 'All Projects' },
@@ -165,7 +165,7 @@ const Projects = () => {
     { id: 'gamefi', label: 'GameFi' },
   ];
 
-  // Initialize filtered projects on component mount
+  // Update filtered projects when the filter changes
   useEffect(() => {
     setFilteredProjects(
       activeFilter === 'all' 
@@ -173,7 +173,7 @@ const Projects = () => {
         : projects.filter(project => project.category === activeFilter)
     );
     setActiveTab(0); // Reset to first project when filter changes
-  }, [activeFilter]);
+  }, [activeFilter, projects]);
 
   // Handle filter change
   const handleFilterChange = (filterId) => {

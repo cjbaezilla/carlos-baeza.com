@@ -63,9 +63,11 @@ const Certifications = () => {
   };
 
   // Function to create placeholder SVG for certifications
+  // eslint-disable-next-line no-unused-vars
   const createCertSvg = (title, color) => {
     // Extract initials from title
     const initials = title.split(' ').map(word => word[0]).join('');
+    // eslint-disable-next-line no-unused-vars
     const gradient = color || "from-blue-600 to-purple-600";
     
     return `data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3e%3cdefs%3e%3clinearGradient id='grad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3e%3cstop offset='0%25' stop-color='%233b82f6' /%3e%3cstop offset='100%25' stop-color='%238b5cf6' /%3e%3c/linearGradient%3e%3c/defs%3e%3crect width='300' height='200' fill='url(%23grad)' /%3e%3ccircle cx='150' cy='80' r='40' fill='rgba(255,255,255,0.2)' /%3e%3ctext x='150' y='90' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-weight='bold' font-size='36px' fill='white'%3e${initials}%3c/text%3e%3ctext x='150' y='150' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='16px' fill='white'%3eCertification%3c/text%3e%3c/svg%3e`;

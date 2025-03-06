@@ -308,8 +308,16 @@ const BackgroundCubes = () => {
       // Remove event listener
       window.removeEventListener('resize', handleResize);
       
+      // Save refs to local variables to avoid the ESLint warning
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      const cubes = cubesRef.current || [];
+      const dataLines = dataLinesRef.current || [];
+      const renderer = rendererRef.current;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      const container = containerRef.current;
+      
       // Dispose of Three.js objects
-      cubesRef.current.forEach(cube => {
+      cubes.forEach(cube => {
         cube.userData.dataPackets.forEach(packet => {
           scene.remove(packet);
           packet.geometry.dispose();
@@ -321,20 +329,20 @@ const BackgroundCubes = () => {
         cube.material.dispose();
       });
       
-      dataLinesRef.current.forEach(line => {
+      dataLines.forEach(line => {
         scene.remove(line);
         line.geometry.dispose();
         line.material.dispose();
       });
       
       // Remove renderer DOM element
-      if (rendererRef.current && containerRef.current) {
-        containerRef.current.removeChild(rendererRef.current.domElement);
+      if (renderer && container) {
+        container.removeChild(renderer.domElement);
       }
       
       // Dispose of renderer
-      if (rendererRef.current) {
-        rendererRef.current.dispose();
+      if (renderer) {
+        renderer.dispose();
       }
     };
   }, []);
