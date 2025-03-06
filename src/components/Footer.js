@@ -60,6 +60,48 @@ const Footer = () => {
         ref={canvasRef} 
         className="absolute inset-0 w-full h-full z-0"
       />
+
+      {/* Transition connector from Hackathons section */}
+      <div className="footer-transition-connector relative w-full overflow-hidden">
+        {/* Digital circuit pattern */}
+        <div className="circuit-pattern absolute w-full h-16 overflow-hidden">
+          <div className="h-px bg-gradient-to-r from-transparent via-indigo-400 to-transparent w-3/4 mx-auto mb-6"></div>
+          
+          <div className="flex justify-center space-x-8 mb-6">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div key={i} className="relative">
+                <div 
+                  className="w-3 h-3 rounded-full bg-indigo-500 opacity-80"
+                  style={{
+                    boxShadow: '0 0 12px rgba(99, 102, 241, 0.7)',
+                    animation: `pulse-bright 3s infinite ${i * 0.3}s`
+                  }}
+                ></div>
+                <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-px h-10 bg-gradient-to-b from-indigo-400 to-transparent"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Connecting hexagon pattern */}
+        <div className="hexagon-pattern relative h-20 mt-10">
+          <div className="flex justify-center space-x-12">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div 
+                key={i} 
+                className="hexagon relative"
+                style={{
+                  transform: `translateY(${(i % 2) * 10}px)`
+                }}
+              >
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rotate-45 border border-indigo-400 opacity-30"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 rotate-45 border border-indigo-300 opacity-50"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5 h-5 rotate-45 bg-indigo-500 opacity-30"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
       
       {/* Asymmetric content container */}
       <div className="container relative z-10 mx-auto px-4">
@@ -95,7 +137,7 @@ const Footer = () => {
                 </svg>
               ),
               color: 'bg-opacity-20 bg-purple-700 border-2 border-purple-500',
-              transform: 'rotate-2'
+              transform: 'rotate(1deg)'
             },
             { 
               name: 'Twitter', 
@@ -201,6 +243,20 @@ const Footer = () => {
         @keyframes pulse {
           0%, 100% { opacity: 0.7; }
           50% { opacity: 1; }
+        }
+
+        @keyframes pulse-bright {
+          0% { transform: scale(1); opacity: 0.8; }
+          50% { transform: scale(1.3); opacity: 1; }
+          100% { transform: scale(1); opacity: 0.8; }
+        }
+        
+        .circuit-pattern {
+          z-index: 5;
+        }
+        
+        .hexagon-pattern {
+          z-index: 5;
         }
       `}</style>
     </footer>
