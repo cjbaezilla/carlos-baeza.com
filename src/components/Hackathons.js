@@ -336,6 +336,86 @@ const Hackathons = () => {
             </motion.div>
           ))}
         </motion.div>
+        
+        {/* POAP Collection floating card */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-16 mb-10 max-w-4xl mx-auto relative"
+        >
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-2xl blur-xl transform -rotate-1"></div>
+          <div className="bg-gradient-to-br from-gray-800/90 to-gray-900/80 rounded-2xl p-8 border border-purple-500/20 shadow-xl relative overflow-hidden group transform hover:rotate-1 transition-transform duration-300">
+            {/* Floating badge */}
+            <div className="absolute -top-5 -right-5 w-28 h-28">
+              <div className="absolute top-0 right-0 w-full h-full transform rotate-12 transition-transform duration-300 group-hover:rotate-6">
+                <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-lg">
+                  <defs>
+                    <linearGradient id="poapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#8B5CF6" />
+                      <stop offset="100%" stopColor="#4F46E5" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M50,0 L97,25 L97,75 L50,100 L3,75 L3,25 Z" fill="url(#poapGrad)" />
+                  <text x="50" y="55" dominantBaseline="middle" textAnchor="middle" fontFamily="sans-serif" fontWeight="bold" fontSize="16" fill="white">POAP</text>
+                </svg>
+              </div>
+            </div>
+            
+            {/* Background effect */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/5 rounded-full filter blur-3xl opacity-70 -translate-y-1/2 translate-x-1/4"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-600/5 rounded-full filter blur-3xl opacity-70 translate-y-1/2 -translate-x-1/4"></div>
+            
+            <div className="flex flex-col md:flex-row items-center gap-8 relative z-10">
+              <div className="flex-shrink-0">
+                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-lg relative group-hover:scale-105 transition-transform duration-300">
+                  {/* POAP logo with animation */}
+                  <div className="w-full h-full bg-gradient-to-br from-purple-700 to-indigo-800 flex items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+                    <svg viewBox="0 0 100 100" className="w-16 h-16 text-white relative z-10 animate-pulse-slow">
+                      <path d="M50 5C25.1 5 5 25.1 5 50s20.1 45 45 45 45-20.1 45-45S74.9 5 50 5zm0 82c-20.4 0-37-16.6-37-37s16.6-37 37-37 37 16.6 37 37-16.6 37-37 37z" fill="currentColor"/>
+                      <path d="M50 15c-19.3 0-35 15.7-35 35s15.7 35 35 35 35-15.7 35-35-15.7-35-35-35zm0 60c-13.8 0-25-11.2-25-25s11.2-25 25-25 25 11.2 25 25-11.2 25-25 25z" fill="currentColor"/>
+                      <circle cx="50" cy="50" r="12" fill="currentColor"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex-1 text-center md:text-left">
+                <h3 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400 mb-3">Proof of Attendance Protocol</h3>
+                <p className="text-gray-300 mb-5 text-lg leading-relaxed">
+                  Browse my collection of POAP tokens – digital badges that authenticate my participation in blockchain events, conferences, and communities around the world.
+                </p>
+                
+                <a 
+                  href="https://app.poap.xyz/scan/baeza.eth"
+                  target="_blank"
+                  rel="noopener noreferrer" 
+                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-base font-medium hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 shadow-lg transform group-hover:translate-y-[-2px]"
+                >
+                  <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M8.5 12.5L10.5 14.5L15.5 9.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span>Explore My POAP Collection</span>
+                  <svg 
+                    className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            
+            {/* Floating certificate-like elements */}
+            <div className="absolute -bottom-6 -right-6 w-24 h-32 bg-purple-500/10 rounded-lg transform rotate-12 border border-purple-500/20"></div>
+            <div className="absolute -bottom-4 -right-1 w-16 h-24 bg-indigo-500/10 rounded-lg transform -rotate-6 border border-indigo-500/20"></div>
+          </div>
+        </motion.div>
       </div>
       
       {/* CSS for the 3D cubes */}
