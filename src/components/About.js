@@ -203,7 +203,7 @@ const About = () => {
               className="flex flex-wrap gap-4 mt-8"
             >
               <a 
-                href="/files/carlos_baeza_resume.pdf" 
+                href="https://carlos-baeza.com/resume.pdf" 
                 download 
                 className="px-6 py-3 bg-dark-card text-blue-400 font-medium rounded-lg border border-blue-600 hover:bg-dark-primary transition duration-300 shadow-lg"
               >

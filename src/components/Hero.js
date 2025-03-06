@@ -132,6 +132,7 @@ const Hero = () => {
               <span className="bg-dark-card px-3 py-1 rounded-full text-sm">Ethereum</span>
               <span className="bg-dark-card px-3 py-1 rounded-full text-sm">Solidity</span>
               <span className="bg-dark-card px-3 py-1 rounded-full text-sm">Smart Contracts</span>
+              <span className="bg-dark-card px-3 py-1 rounded-full text-sm">Blockchain</span>
               <span className="bg-dark-card px-3 py-1 rounded-full text-sm">DeFi</span>
             </motion.div>
             
