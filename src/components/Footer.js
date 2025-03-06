@@ -225,7 +225,7 @@ const Footer = () => {
             <div className="absolute inset-0 blur-md bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 opacity-70"></div>
             <div className="relative px-6 py-3 bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm border-2 border-cyan-400 rounded-full">
               <div className="flex items-center space-x-2">
-                <div className="text-2xl font-bold text-white">
+                <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white break-all">
                   <span className="inline-block animate-bounce text-yellow-300 mr-1">⚡</span>
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-pink-500 to-cyan-400">
                     lightning@carlos-baeza.com
