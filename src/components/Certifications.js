@@ -170,22 +170,27 @@ const Certifications = () => {
 
   return (
     <section id="certifications" className="py-20 relative overflow-hidden">
-      {/* Simple gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-emerald-950 to-cyan-900"></div>
+      {/* Dynamic background with particles */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800"></div>
       
-      {/* CSS Grid pattern */}
-      <div className="absolute inset-0 opacity-10" 
-           style={{
-             backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
-             backgroundSize: '40px 40px'
-           }}>
+      {/* Hexagon pattern background */}
+      <div className="absolute inset-0 opacity-5">
+        <svg width="100%" height="100%" className="absolute inset-0">
+          <pattern id="hexagons" width="50" height="43.4" patternUnits="userSpaceOnUse" patternTransform="scale(2)">
+            <polygon points="24.8,22 37.3,29 37.3,43 24.8,50 12.3,43 12.3,29" fill="none" stroke="currentColor" strokeWidth="0.6"></polygon>
+            <polygon points="24.8,0 37.3,7 37.3,21 24.8,28 12.3,21 12.3,7" fill="none" stroke="currentColor" strokeWidth="0.6"></polygon>
+            <polygon points="0,22 12.5,29 12.5,43 0,50 -12.5,43 -12.5,29" fill="none" stroke="currentColor" strokeWidth="0.6"></polygon>
+            <polygon points="49.6,22 62.1,29 62.1,43 49.6,50 37.1,43 37.1,29" fill="none" stroke="currentColor" strokeWidth="0.6"></polygon>
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#hexagons)"></rect>
+        </svg>
       </div>
       
-      {/* Glowing orbs */}
+      {/* Floating gradients */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-10 w-64 h-64 bg-emerald-500 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse-slow"></div>
-        <div className="absolute bottom-1/3 right-10 w-72 h-72 bg-cyan-400 rounded-full mix-blend-screen filter blur-3xl opacity-20 animate-pulse-slow-delayed"></div>
-        <div className="absolute top-2/3 left-1/3 w-48 h-48 bg-teal-400 rounded-full mix-blend-screen filter blur-3xl opacity-[0.15] animate-float"></div>
+        <div className="absolute -top-20 -left-20 w-72 h-72 bg-emerald-500/20 rounded-full mix-blend-screen filter blur-[60px] animate-float-slow"></div>
+        <div className="absolute top-[70%] right-[5%] w-80 h-80 bg-blue-500/20 rounded-full mix-blend-screen filter blur-[70px] animate-float-slow-delayed"></div>
+        <div className="absolute top-[30%] left-[60%] w-60 h-60 bg-purple-500/20 rounded-full mix-blend-screen filter blur-[80px] animate-pulse-slow"></div>
       </div>
       
       {/* Content container */}
@@ -197,141 +202,203 @@ const Certifications = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gradient">Professional Certifications</h2>
-          <div className="w-32 h-1.5 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
-          <p className="text-gray-300 mt-6 max-w-2xl mx-auto text-lg">
-            Credentials that validate my expertise in blockchain technologies and development
+          {/* Stylized heading with animated underline */}
+          <div className="inline-block">
+            <h2 className="text-3xl md:text-5xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-blue-500 to-purple-600">Professional Certifications</h2>
+            <div className="w-full h-1 bg-gradient-to-r from-teal-400 via-blue-500 to-purple-600 rounded-full relative">
+              <div className="absolute top-0 left-0 w-1/2 h-full bg-white/30 rounded-full animate-shimmer"></div>
+            </div>
+          </div>
+          <p className="text-gray-300 mt-6 max-w-3xl mx-auto text-lg">
+            Credentials that validate my expertise in blockchain technologies and development methodologies
           </p>
         </motion.div>
         
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid md:grid-cols-2 gap-10"
-        >
-          {certifications.map((cert) => (
-            <motion.div
-              key={cert.id}
-              variants={itemVariants}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-              className="bg-gradient-to-br from-dark-card to-dark-card/80 rounded-2xl overflow-hidden shadow-xl border border-dark-border/40 group transition-all duration-300 relative flex flex-col"
-            >
-              {/* Glowing border on hover */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-blue-500/30 transition-all duration-500 opacity-0 group-hover:opacity-100"></div>
-              
-              {/* Card header with image - responsive design */}
-              <div className="sm:h-48 md:h-56 w-full relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-900/30 to-purple-900/30 z-10 transition-all duration-300 group-hover:opacity-80"></div>
-                <div className="w-full h-full bg-gradient-to-tr from-gray-800 to-gray-900 flex items-center justify-center">
-                  {getCertIcon(cert)}
-                </div>
-                <div className="absolute bottom-4 right-4 px-3 py-1.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white text-sm rounded-full z-30 shadow-lg shadow-blue-900/30">
-                  {cert.date}
-                </div>
-              </div>
-              
-              {/* Card content */}
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center mb-2">
-                    <span className="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>
-                    <p className="text-blue-400 font-medium">{cert.issuer}</p>
+        {/* Circular layout for certifications */}
+        <div className="relative mb-24">
+          {/* Central connecting element */}
+          <motion.div 
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="w-24 h-24 bg-gradient-to-br from-blue-600/30 to-purple-600/30 rounded-full mx-auto mb-16 flex items-center justify-center relative"
+          >
+            <div className="w-16 h-16 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg shadow-blue-500/20">
+              <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 15L12 22M12 22L9 19M12 22L15 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M12 8L12 3M12 3L15 6M12 3L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M19 10L22 10M22 10L19 13M22 10L19 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M5 10L2 10M2 10L5 7M2 10L5 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            {/* Pulsing rings */}
+            <div className="absolute inset-0 rounded-full border-2 border-blue-500/50 animate-ping-slow"></div>
+            <div className="absolute -inset-4 rounded-full border border-purple-500/30"></div>
+            <div className="absolute -inset-8 rounded-full border border-teal-500/20"></div>
+          </motion.div>
+          
+          {/* Honeycomb grid layout */}
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-6"
+          >
+            {certifications.map((cert, index) => (
+              <motion.div
+                key={cert.id}
+                variants={itemVariants}
+                className="flex justify-center"
+              >
+                <div className="w-full max-w-md bg-gradient-to-br from-slate-800 to-slate-900 backdrop-blur-sm rounded-xl overflow-hidden border border-slate-700/30 shadow-xl transform transition-all duration-300 hover:scale-105 hover:rotate-1 hover:shadow-blue-900/20 group">
+                  {/* Top glowing bar */}
+                  <div className="h-1.5 w-full bg-gradient-to-r from-blue-500 via-purple-500 to-emerald-500"></div>
+                  
+                  {/* Card header with floating icon */}
+                  <div className="flex justify-between items-start p-5 pb-0 relative">
+                    <div>
+                      <div className="bg-slate-700/50 px-3 py-1 rounded-full text-xs font-medium text-slate-300 inline-flex items-center">
+                        <span className="w-1.5 h-1.5 rounded-full bg-blue-400 mr-1.5"></span>
+                        {cert.issuer}
+                      </div>
+                      <h3 className="text-xl font-bold mt-2 text-white group-hover:text-blue-200 transition-colors duration-300">{cert.title}</h3>
+                    </div>
+                    
+                    {/* Date chip */}
+                    <div className="flex flex-col items-center">
+                      <div className="text-sm font-bold text-white bg-gradient-to-br from-blue-600 to-purple-600 px-3 py-1 rounded shadow-lg transform group-hover:scale-110 transition-all duration-300">
+                        {cert.date}
+                      </div>
+                    </div>
                   </div>
                   
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-blue-200 transition-colors">{cert.title}</h3>
-                  
-                  <p className="text-gray-400 mb-5 leading-relaxed">{cert.description}</p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {cert.skills.map((skill, index) => (
-                      <span 
-                        key={index} 
-                        className="px-3 py-1 bg-dark-primary/50 text-gray-300 text-sm rounded-full border border-dark-border/50 group-hover:border-blue-600/30 transition-all"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+                  {/* Icon with glow effect */}
+                  <div className="relative px-5 mt-4">
+                    <div className="relative h-16 bg-gradient-to-br from-slate-700/60 to-slate-800/60 rounded-xl overflow-hidden backdrop-blur-sm p-2 flex items-center">
+                      <div className="absolute -bottom-6 -right-6 w-24 h-24 bg-blue-500/10 rounded-full filter blur-xl"></div>
+                      <div className="flex items-center">
+                        <div className="w-12 h-12 mr-4 rounded-lg bg-gradient-to-br from-slate-700 to-slate-800 p-1 flex items-center justify-center border border-slate-600/50">
+                          {getCertIcon(cert)}
+                        </div>
+                        <p className="text-sm text-slate-300 line-clamp-2">{cert.description}</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                
-                <div className="pt-3 border-t border-dark-border/50">
-                  <a 
-                    href={cert.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      window.open(cert.url, '_blank', 'noopener,noreferrer');
-                    }}
-                    className="inline-flex items-center justify-center w-full px-4 py-2.5 bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-lg font-medium hover:from-blue-700 hover:to-blue-600 transition-all duration-300 shadow-lg hover:shadow-blue-600/20 group-hover:shadow-blue-500/30 cursor-pointer relative z-10"
-                  >
-                    <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 12.75C13.63 12.75 15.07 13.14 16.24 13.65C17.32 14.13 18 15.21 18 16.38V17.25C18 17.66 17.66 18 17.25 18H6.75C6.34 18 6 17.66 6 17.25V16.38C6 15.21 6.68 14.13 7.76 13.65C8.93 13.14 10.37 12.75 12 12.75Z" fill="currentColor" />
-                      <path d="M12 10.5C13.66 10.5 15 9.16 15 7.5C15 5.84 13.66 4.5 12 4.5C10.34 4.5 9 5.84 9 7.5C9 9.16 10.34 10.5 12 10.5Z" fill="currentColor" />
-                      <path d="M17 8L19 10M19 10L21 8M19 10V6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span>View Certificate</span>
-                    <svg 
-                      className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
 
-        {/* POAP Collection Section */}
+                  {/* Skills section */}
+                  <div className="p-5">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {cert.skills.map((skill, idx) => (
+                        <span 
+                          key={idx} 
+                          className="inline-flex items-center px-2.5 py-0.5
+                                     bg-gradient-to-r from-slate-800 to-slate-700
+                                     text-gray-300 text-xs font-medium
+                                     rounded-md border border-slate-700 
+                                     group-hover:border-blue-800/30 transition-all"
+                        >
+                          #{skill}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* Action button */}
+                    <a 
+                      href={cert.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center w-full px-4 py-2.5 
+                                 bg-gradient-to-r from-blue-600 to-purple-600 
+                                 text-white rounded-lg font-medium 
+                                 hover:from-blue-700 hover:to-purple-700 
+                                 transition-all duration-300 shadow-lg 
+                                 hover:shadow-blue-600/20 group-hover:shadow-blue-500/30"
+                    >
+                      <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 15C15.866 15 19 11.866 19 8C19 4.13401 15.866 1 12 1C8.13401 1 5 4.13401 5 8C5 11.866 8.13401 15 12 15Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M8 14L4.5 23L12 20L19.5 23L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <span>View Certificate</span>
+                      <svg 
+                        className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" 
+                        fill="none" 
+                        viewBox="0 0 24 24" 
+                        stroke="currentColor"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+        
+        {/* POAP Collection floating card - keeping this from the previous design */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-16 mb-10 max-w-3xl mx-auto"
+          className="mt-10 mb-10 max-w-4xl mx-auto relative"
         >
-          <div className="bg-gradient-to-br from-dark-card/90 to-dark-card/70 rounded-2xl p-6 border border-purple-500/20 shadow-lg relative overflow-hidden group">
-            {/* Background effect */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full filter blur-3xl opacity-70 -translate-y-1/2 translate-x-1/4"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-600/10 rounded-full filter blur-3xl opacity-70 translate-y-1/2 -translate-x-1/4"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-2xl blur-xl transform -rotate-1"></div>
+          <div className="bg-gradient-to-br from-gray-800/90 to-gray-900/80 rounded-2xl p-8 border border-purple-500/20 shadow-xl relative overflow-hidden group transform hover:rotate-1 transition-transform duration-300">
+            {/* Floating badge */}
+            <div className="absolute -top-5 -right-5 w-28 h-28">
+              <div className="absolute top-0 right-0 w-full h-full transform rotate-12 transition-transform duration-300 group-hover:rotate-6">
+                <svg viewBox="0 0 100 100" className="w-full h-full drop-shadow-lg">
+                  <defs>
+                    <linearGradient id="poapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#8B5CF6" />
+                      <stop offset="100%" stopColor="#4F46E5" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M50,0 L97,25 L97,75 L50,100 L3,75 L3,25 Z" fill="url(#poapGrad)" />
+                  <text x="50" y="55" dominantBaseline="middle" textAnchor="middle" fontFamily="sans-serif" fontWeight="bold" fontSize="16" fill="white">POAP</text>
+                </svg>
+              </div>
+            </div>
             
-            <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+            {/* Background effect */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/5 rounded-full filter blur-3xl opacity-70 -translate-y-1/2 translate-x-1/4"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-indigo-600/5 rounded-full filter blur-3xl opacity-70 translate-y-1/2 -translate-x-1/4"></div>
+            
+            <div className="flex flex-col md:flex-row items-center gap-8 relative z-10">
               <div className="flex-shrink-0">
-                <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-lg relative group-hover:scale-105 transition-transform duration-300">
-                  {/* POAP SVG logo directly embedded */}
-                  <div className="w-full h-full bg-gradient-to-br from-purple-700 to-indigo-800 flex items-center justify-center">
-                    <svg viewBox="0 0 100 100" className="w-14 h-14 text-white" fill="currentColor">
-                      <path d="M50 10C27.9 10 10 27.9 10 50s17.9 40 40 40 40-17.9 40-40S72.1 10 50 10zm0 72c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"/>
-                      <path d="M50 20c-16.5 0-30 13.5-30 30s13.5 30 30 30 30-13.5 30-30-13.5-30-30-30zm0 50c-11 0-20-9-20-20s9-20 20-20 20 9 20 20-9 20-20 20z"/>
-                      <circle cx="50" cy="50" r="10"/>
+                <div className="w-28 h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-purple-500/30 shadow-lg relative group-hover:scale-105 transition-transform duration-300">
+                  {/* POAP logo with animation */}
+                  <div className="w-full h-full bg-gradient-to-br from-purple-700 to-indigo-800 flex items-center justify-center overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"></div>
+                    <svg viewBox="0 0 100 100" className="w-16 h-16 text-white relative z-10 animate-pulse-slow">
+                      <path d="M50 5C25.1 5 5 25.1 5 50s20.1 45 45 45 45-20.1 45-45S74.9 5 50 5zm0 82c-20.4 0-37-16.6-37-37s16.6-37 37-37 37 16.6 37 37-16.6 37-37 37z" fill="currentColor"/>
+                      <path d="M50 15c-19.3 0-35 15.7-35 35s15.7 35 35 35 35-15.7 35-35-15.7-35-35-35zm0 60c-13.8 0-25-11.2-25-25s11.2-25 25-25 25 11.2 25 25-11.2 25-25 25z" fill="currentColor"/>
+                      <circle cx="50" cy="50" r="12" fill="currentColor"/>
                     </svg>
                   </div>
                 </div>
               </div>
               
               <div className="flex-1 text-center md:text-left">
-                <h4 className="text-xl md:text-2xl font-bold text-gradient-purple mb-2">POAP Collection</h4>
-                <p className="text-gray-300 mb-4">
-                  My collection of Proof of Attendance Protocol badges from blockchain events, conferences, and communities I've been part of.
+                <h3 className="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-indigo-400 mb-3">Proof of Attendance Protocol</h3>
+                <p className="text-gray-300 mb-5 text-lg leading-relaxed">
+                  Browse my collection of POAP tokens – digital badges that authenticate my participation in blockchain events, conferences, and communities around the world.
                 </p>
                 
                 <a 
                   href="https://app.poap.xyz/scan/baeza.eth"
                   target="_blank"
                   rel="noopener noreferrer" 
-                  className="inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-full text-base font-medium hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-purple-600/20 group-hover:shadow-purple-500/30"
+                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white rounded-xl text-base font-medium hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 shadow-lg transform group-hover:translate-y-[-2px]"
                 >
                   <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2"/>
                     <path d="M8.5 12.5L10.5 14.5L15.5 9.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
-                  <span>View My POAP Collection</span>
+                  <span>Explore My POAP Collection</span>
                   <svg 
                     className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" 
                     fill="none" 
@@ -343,6 +410,10 @@ const Certifications = () => {
                 </a>
               </div>
             </div>
+            
+            {/* Floating certificate-like elements */}
+            <div className="absolute -bottom-6 -right-6 w-24 h-32 bg-purple-500/10 rounded-lg transform rotate-12 border border-purple-500/20"></div>
+            <div className="absolute -bottom-4 -right-1 w-16 h-24 bg-indigo-500/10 rounded-lg transform -rotate-6 border border-indigo-500/20"></div>
           </div>
         </motion.div>
       </div>
