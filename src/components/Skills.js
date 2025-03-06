@@ -300,7 +300,7 @@ const Skills = () => {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
         >
           {skillCategories.map((category, index) => (
             <motion.div 
@@ -331,7 +331,7 @@ const Skills = () => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
-                      className="flex flex-col lg:flex-row"
+                      className="flex flex-col lg:flex-row gap-6"
                     >
                       {/* Main skills bar chart */}
                       <div className="lg:w-1/2 mb-8 lg:mb-0">
@@ -403,9 +403,9 @@ const Skills = () => {
                     </div>
                     
                     {/* Skill pills - preview */}
-                    <div className="flex flex-wrap mb-3">
+                    <div className="flex flex-wrap gap-2 mb-3">
                       {category.mainSkills.map((skill, idx) => (
-                        <div key={idx} className="flex items-center mr-4 mb-2">
+                        <div key={idx} className="flex items-center mr-2 mb-2">
                           <div className="w-1.5 h-1.5 rounded-full mr-1" style={{ backgroundColor: getColorForIndex(idx) }}></div>
                           <span className="text-gray-300 text-sm">{skill.name}</span>
                         </div>

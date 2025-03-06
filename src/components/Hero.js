@@ -49,7 +49,7 @@ const Hero = () => {
   }));
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-dark-background py-16 lg:py-0">
+    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-dark-background py-10 lg:py-0">
       {/* Three.js Background with falling cubes */}
       <BackgroundCubes />
       
@@ -101,7 +101,7 @@ const Hero = () => {
       </div>
       
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left column with text */}
           <motion.div
             variants={containerVariants}
@@ -110,7 +110,7 @@ const Hero = () => {
           >
             <motion.h1 
               variants={itemVariants}
-              className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-100"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-gray-100"
             >
               <span className="block">Carlos Baeza</span>
               <span className="text-gradient">Blockchain Engineer</span>
@@ -118,7 +118,7 @@ const Hero = () => {
             
             <motion.p 
               variants={itemVariants}
-              className="mt-6 text-xl text-gray-300 leading-relaxed max-w-2xl"
+              className="mt-4 md:mt-6 text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl"
             >
               I build secure and scalable blockchain solutions, specializing in smart contracts, 
               DeFi protocols, and Web3 infrastructure.
@@ -128,17 +128,17 @@ const Hero = () => {
               variants={itemVariants} 
               className="mt-4 flex flex-wrap gap-2 text-gray-400"
             >
-              <span className="bg-dark-card px-3 py-1 rounded-full text-sm">Bitcoin</span>
-              <span className="bg-dark-card px-3 py-1 rounded-full text-sm">Ethereum</span>
-              <span className="bg-dark-card px-3 py-1 rounded-full text-sm">Solidity</span>
-              <span className="bg-dark-card px-3 py-1 rounded-full text-sm">Smart Contracts</span>
-              <span className="bg-dark-card px-3 py-1 rounded-full text-sm">Blockchain</span>
-              <span className="bg-dark-card px-3 py-1 rounded-full text-sm">DeFi</span>
+              <span className="bg-dark-card px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Bitcoin</span>
+              <span className="bg-dark-card px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Ethereum</span>
+              <span className="bg-dark-card px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Solidity</span>
+              <span className="bg-dark-card px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Smart Contracts</span>
+              <span className="bg-dark-card px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Blockchain</span>
+              <span className="bg-dark-card px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">DeFi</span>
             </motion.div>
             
             <motion.div 
               variants={itemVariants} 
-              className="flex flex-wrap justify-center md:justify-start gap-4 mt-8"
+              className="flex flex-wrap justify-center sm:justify-start gap-3 md:gap-4 mt-6 md:mt-8"
             >
               <motion.a 
                 href="#projects" 

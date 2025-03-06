@@ -81,7 +81,7 @@ function App() {
       <LoadingScreen isLoading={isLoading} />
       <AnimatePresence mode="wait">
         <motion.div 
-          className="font-sans dark min-h-screen"
+          className="font-sans dark min-h-screen w-screen overflow-x-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}

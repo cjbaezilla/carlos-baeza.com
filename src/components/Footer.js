@@ -255,11 +255,11 @@ const Footer = () => {
         
         {/* Stylized copyright */}
         <div className="text-center">
-          <p className="text-sm text-cyan-300 font-light tracking-widest">
+          <p className="text-xs sm:text-sm text-cyan-300 font-light tracking-wider sm:tracking-widest">
             <span className="inline-block">{currentYear}</span>
-            <span className="inline-block mx-2">◈</span>
+            <span className="inline-block mx-1 sm:mx-2">◈</span>
             <span className="inline-block">DESIGNED & CODED WITH PASSION</span>
-            <span className="inline-block mx-2">◈</span>
+            <span className="inline-block mx-1 sm:mx-2">◈</span>
             <span className="inline-block">CARLOS BAEZA</span>
           </p>
         </div>

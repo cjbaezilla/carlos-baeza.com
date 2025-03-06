@@ -30,7 +30,7 @@ const Navbar = () => {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
       isScrolled 
         ? 'bg-dark-primary/90 backdrop-blur-md shadow-md py-2'
-        : 'bg-transparent py-4'
+        : 'bg-transparent py-3 md:py-4'
     }`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
@@ -76,12 +76,12 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden pt-4 pb-2">
+          <div className="md:hidden pt-4 pb-2 bg-dark-primary/90 backdrop-blur-md rounded-lg mt-2 shadow-lg border border-dark-accent/30">
             {navLinks.map((link) => (
               <a 
                 key={link.name}
                 href={link.href}
-                className="block py-2 text-gray-200 hover:text-blue-400 transition duration-300"
+                className="block py-3 px-4 text-gray-200 hover:text-blue-400 hover:bg-dark-accent/10 transition duration-300"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 {link.name}

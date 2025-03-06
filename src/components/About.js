@@ -16,7 +16,7 @@ const About = () => {
           <div className="w-24 h-1 bg-blue-600 mx-auto"></div>
         </div>
         
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
           {/* Left side - Geometric Pattern Image */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -26,7 +26,7 @@ const About = () => {
             className="relative flex justify-center"
           >
             <div className="relative w-full h-full max-w-md mx-auto">
-              <div className="aspect-[9/16] w-full rounded-xl overflow-hidden shadow-2xl border-2 border-dark-accent">
+              <div className="aspect-[9/16] w-full max-w-sm mx-auto rounded-xl overflow-hidden shadow-2xl border-2 border-dark-accent">
                 <img 
                   src="https://png.pngtree.com/background/20210717/original/pngtree-vertical-multi-colored-isometric-decorative-background-for-instagram-stories-cover-landing-picture-image_1437597.jpg" 
                   alt="Geometric Pattern" 
@@ -137,7 +137,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-4 my-8"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6 md:my-8"
             >
               <div className="bg-dark-card p-5 rounded-xl border border-dark-accent hover:border-blue-500 transition-all duration-300 shadow-lg group">
                 <div className="text-blue-500 mb-2 text-2xl">
@@ -200,7 +200,7 @@ const About = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="flex flex-wrap gap-4 mt-8"
+              className="flex flex-wrap gap-3 md:gap-4 mt-6 md:mt-8"
             >
               <a 
                 href="https://carlos-baeza.com/resume.pdf" 
