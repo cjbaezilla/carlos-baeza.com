@@ -52,10 +52,6 @@ const Footer = () => {
             <a href="#certifications" className="hover:text-blue-400 transition duration-300">Certifications</a>
             <a href="#contact" className="hover:text-blue-400 transition duration-300">Contact</a>
           </div>
-          
-          <p>
-            Currently focused on Bitcoin, Lightning Network, and Blockchain Security
-          </p>
         </div>
       </div>
     </footer>

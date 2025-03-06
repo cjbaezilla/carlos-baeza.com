@@ -314,58 +314,6 @@ const Skills = () => {
         </div>
         
         {activeTab === 'skills' ? renderSkillsTab() : renderChartsTab()}
-        
-        <motion.div 
-          variants={itemVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          className="mt-16 rounded-xl shadow-2xl overflow-hidden"
-          whileHover={{ y: -5 }}
-          transition={{ type: "spring", stiffness: 300 }}
-        >
-          <div className="bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-8 md:p-10">
-            <div className="flex flex-col md:flex-row items-center justify-between">
-              <div className="mb-6 md:mb-0 md:mr-6">
-                <h3 className="text-2xl font-bold mb-4">Carlos's Current Focus</h3>
-                <p className="text-gray-100 mb-4">
-                  Currently exploring and researching cutting-edge blockchain technologies:
-                </p>
-                <div className="flex flex-wrap">
-                  {[
-                    "Bitcoin", "Lightning Network", "Taproot Assets", 
-                    "BTCPay Server", "Nostr", "Nostr Wallet Connect", 
-                    "ASIC Mining", "Self Sovereignty", "Self Custody", 
-                    "Scripting", "Security"
-                  ].map((tech, index) => (
-                    <motion.span 
-                      key={index} 
-                      className="bg-white/20 text-white px-3 py-1 rounded-full mr-2 mb-2 text-sm hover:bg-white/30 transition duration-300"
-                      whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.3)" }}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      {tech}
-                    </motion.span>
-                  ))}
-                </div>
-              </div>
-              <motion.div 
-                className="flex-shrink-0"
-                animate={{ rotate: 360 }}
-                transition={{ 
-                  duration: 20, 
-                  repeat: Infinity, 
-                  ease: "linear" 
-                }}
-              >
-                <svg className="w-32 h-32 text-white/80" viewBox="0 0 64 64" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M63.0399 39.74C58.1199 56.66 41.0599 67.12 24.1399 62.2C7.21985 57.28 -3.24015 40.22 1.67985 23.3C6.61985 6.38 23.6799 -4.08 40.5999 0.859999C57.5399 5.81 67.9799 22.86 63.0399 39.74ZM45.8999 35.77L47.4599 30.43L43.4199 29L44.9999 23.47L40.9599 22.04L39.3999 27.38L35.3399 25.95L36.9199 20.62L32.8799 19.19L31.2999 24.52L25.0199 22.36L23.4799 27.86L26.3399 28.74L22.2399 41.95L27.7399 43.49L28.5599 40.63L34.8399 42.78L34.0199 45.64L39.5199 47.18L43.6199 33.97L46.4799 34.85C46.9799 34.01 45.8999 35.77 45.8999 35.77ZM37.1799 38.48L30.8999 36.33L33.2999 29.24L39.5799 31.38L37.1799 38.48Z"/>
-                </svg>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
