@@ -34,8 +34,12 @@ const Navbar = () => {
     }`}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-between items-center">
-          <a href="#" className="text-xl md:text-2xl font-bold text-blue-400">
-            <span className="mr-2">⚡</span>Carlos Baeza
+          <a href="#" className="text-xl md:text-2xl font-bold text-blue-400 flex items-center">
+            <img 
+              src="http://carlos-baeza.com/avatar.jpg" 
+              alt="Carlos Baeza" 
+              className="h-8 w-8 rounded-full object-cover"
+            />
           </a>
 
           {/* Desktop Navigation */}
