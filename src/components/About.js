@@ -28,7 +28,7 @@ const About = () => {
             <div className="relative w-full h-full max-w-md mx-auto">
               <div className="aspect-[9/16] w-full max-w-sm mx-auto rounded-xl overflow-hidden shadow-2xl border-2 border-dark-accent">
                 <img 
-                  src="https://png.pngtree.com/background/20210717/original/pngtree-vertical-multi-colored-isometric-decorative-background-for-instagram-stories-cover-landing-picture-image_1437597.jpg" 
+                  src="about.jpg" 
                   alt="Geometric Pattern" 
                   className="w-full h-full object-cover"
                 />
