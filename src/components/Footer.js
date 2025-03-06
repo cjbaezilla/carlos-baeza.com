@@ -109,7 +109,7 @@ const Footer = () => {
         {/* Unconventional layout with asymmetric elements */}
         <div className="flex flex-col items-center mb-16">
           <div className="transform -rotate-3 mb-8">
-            <h2 className="text-5xl font-black italic tracking-tighter">
+            <h2 className="text-2xl md:text-3xl lg:text-5xl font-black italic tracking-tighter text-center">
               <span className="text-yellow-400">CREATE</span>
               <span className="text-cyan-500">.</span>
               <span className="text-purple-500">DISRUPT</span>
