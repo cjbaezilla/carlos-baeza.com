@@ -1,161 +1,299 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const Projects = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [hoveredProject, setHoveredProject] = useState(null);
+
   const projects = [
     {
-      title: "Pulsechain Faucets",
-      year: "2023",
-      description: "The Pulsechain Faucets NFT introduces a novel distributing mechanism for native unwrapped PLS inside the Pulsechain network.",
-      details: "When a user purchases an NFT on Binance Smart Chain or Polygon, 5,000 native PLS are distributed automatically for the user account inside Pulsechain network. It also incorporates a novel distribution mechanism that sends all the PLS received by the contract among the NFT holders proportionally based on users NFT amount.",
-      image: "🪙",
-      technologies: ["Smart Contracts", "Cross-Chain", "NFT", "Binance Smart Chain", "Polygon", "Pulsechain"]
+      title: "DeFi Lending Protocol",
+      description: "A decentralized lending platform that enables users to lend or borrow assets against collateral. Features automated interest rate adjustment based on supply and demand.",
+      category: "defi",
+      image: "https://images.unsplash.com/photo-1639322537504-6427a16b0a28?q=80&w=800&auto=format&fit=crop",
+      techStack: ["Solidity", "React", "Web3.js", "TheGraph", "Hardhat"],
+      link: "#"
     },
     {
-      title: "Black Arrow Futures",
-      year: "2022",
-      description: "A novel copy trading platform for Binance Futures with Telegram bot integration for users to manage positions.",
-      details: "Every time a master trader defined by the platform opens a position on Binance Futures, the bot automatically opens new positions for all the group members based on the Binance API and user preferences. There's also an automated Tradingview bot written in Pinescript that operates on behalf of users, opening positions based on custom strategies coded by Carlos Baeza.",
-      image: "📊",
-      technologies: ["Binance API", "TradingView", "Pinescript", "Telegram Bot", "Copy Trading", "Futures Trading"]
+      title: "NFT Marketplace",
+      description: "A peer-to-peer marketplace for creating, selling, and collecting NFTs with support for multiple blockchains and custom royalty structures.",
+      category: "nft",
+      image: "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800&auto=format&fit=crop",
+      techStack: ["Solidity", "IPFS", "React", "Ethers.js", "Typescript"],
+      link: "#"
     },
     {
-      title: "Condor Blockchain",
-      year: "2021",
-      description: "A public distributed permissioned blockchain compatible with smart contracts and the entire Ethereum ecosystem tooling like Metamask.",
-      details: "The network was built using the Hyperledger Besu framework stack, adopting the IBFT 2.0 consensus for low energy consumption, with high throughput and immediate network finality. A native Uniswap v2 fork was launched in the network along with Gnosis safe vaults for multisig wallets.",
-      image: "🦅",
-      technologies: ["Hyperledger Besu", "IBFT 2.0", "Ethereum Compatible", "Uniswap Fork", "Gnosis Safe", "Smart Contracts"]
+      title: "Cross-Chain Bridge",
+      description: "A trustless bridge that enables asset transfers between Ethereum and other EVM-compatible chains with optimized gas efficiency.",
+      category: "infrastructure",
+      image: "https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=800&auto=format&fit=crop",
+      techStack: ["Solidity", "Go", "React", "Web3.js", "Chainlink"],
+      link: "#"
     },
     {
-      title: "Solana Faction Cards",
-      year: "2021",
-      description: "Collection of 1,333 custom NFT on the Solana Blockchain which enabled staking, voting, and playing a strategy browser game using the NFT cards.",
-      details: "The NFTs were minted using the CandyMachine library and the metadata was stored on Arweave network.",
-      image: "🃏",
-      technologies: ["Solana", "CandyMachine", "Arweave", "NFT", "Gaming", "Staking"]
+      title: "DAO Governance Platform",
+      description: "A comprehensive platform for decentralized autonomous organizations with customizable governance models and proposal systems.",
+      category: "defi",
+      image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?q=80&w=800&auto=format&fit=crop",
+      techStack: ["Solidity", "TheGraph", "React", "TypeScript", "IPFS"],
+      link: "#"
     },
     {
-      title: "CriptoMU Online",
-      year: "2021",
-      description: "The classic and traditional original MU Online game with token economy integrations, allowing players to exchange in-game gold for on-chain tokens.",
-      details: "All the gold farmed by users inside the game was available to be switched for the token representation of it and to be traded on Uniswap Dex. Users could purchase the tokens on Uniswap and spend them in the game, paying for items, subscriptions, and in-game utility.",
-      image: "🎮",
-      technologies: ["Gaming", "Token Economy", "Uniswap", "DeFi", "P2E", "Game Integration"]
+      title: "Smart Contract Security Analyzer",
+      description: "An automated tool for detecting vulnerabilities and optimizing gas usage in Ethereum smart contracts.",
+      category: "development",
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop",
+      techStack: ["Solidity", "Python", "Node.js", "AST Parsing", "Machine Learning"],
+      link: "#"
     },
     {
-      title: "Copihue Stablecoin",
-      year: "2020",
-      description: "A stablecoin pegged to the Chilean CLP currency.",
-      details: "Custom algorithmic approach for a non-collateralized stablecoin.",
-      image: "💰",
-      technologies: ["Stablecoin", "Algorithmic", "CLP Pegged", "Ethereum", "Finance"]
+      title: "Blockchain Explorer",
+      description: "A comprehensive explorer for blockchain data visualization with real-time transaction monitoring and analytics.",
+      category: "infrastructure",
+      image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=800&auto=format&fit=crop",
+      techStack: ["React", "Node.js", "WebSockets", "Chart.js", "Web3.js"],
+      link: "#"
     },
-    {
-      title: "Cordillera EVM Bridge",
-      year: "2020",
-      description: "The Cordillera Bridge was a custom home made ERC20 and native token bridge between any EVM compatible network.",
-      details: "The bridge implements a custom logic which considers 2 actors as signers to transfer tokens between networks using on-chain hash and sign validations.",
-      image: "🌉",
-      technologies: ["Bridge", "Cross-Chain", "ERC20", "Multi-Signature", "Interoperability"]
-    }
   ];
 
+  const filterCategories = [
+    { id: 'all', label: 'All Projects' },
+    { id: 'defi', label: 'DeFi' },
+    { id: 'nft', label: 'NFT' },
+    { id: 'infrastructure', label: 'Infrastructure' },
+    { id: 'development', label: 'Development Tools' },
+  ];
+
+  const filteredProjects = activeFilter === 'all' 
+    ? projects 
+    : projects.filter(project => project.category === activeFilter);
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  };
+
   return (
-    <section id="projects" className="py-20 bg-gray-900 text-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-4xl font-bold mb-12 text-center">
-          <span className="text-blue-400">Blockchain</span> Projects
-        </h2>
+    <section id="projects" className="py-20 relative overflow-hidden bg-gradient-to-b from-white to-gray-50">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <motion.div 
+          className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-blue-100 mix-blend-multiply opacity-70 filter blur-3xl"
+          animate={{ 
+            x: [0, 50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{ 
+            duration: 20, 
+            repeat: Infinity,
+            ease: "easeInOut" 
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-40 left-10 w-80 h-80 rounded-full bg-purple-100 mix-blend-multiply opacity-70 filter blur-3xl"
+          animate={{ 
+            x: [0, -40, 0],
+            y: [0, 50, 0],
+          }}
+          transition={{ 
+            duration: 25, 
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        <motion.div 
+          className="absolute top-1/3 left-1/4 w-48 h-48 rounded-full bg-green-100 mix-blend-multiply opacity-70 filter blur-3xl"
+          animate={{ 
+            x: [0, 60, 0],
+            y: [0, -30, 0],
+          }}
+          transition={{ 
+            duration: 18, 
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+      </div>
+      
+      <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <motion.h2 
+          className="section-heading"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.7 }}
+        >
+          Featured Projects
+        </motion.h2>
         
-        <div className="grid grid-cols-4 md:grid-cols-7 gap-4 mb-8">
-          {projects.map((project, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`p-2 rounded-lg transition-all duration-300 text-center ${activeIndex === index ? 'bg-blue-600 text-white' : 'bg-gray-800 hover:bg-gray-700'}`}
+        <motion.div 
+          className="flex flex-wrap justify-center mb-12 space-x-2"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+        >
+          {filterCategories.map(category => (
+            <motion.button
+              key={category.id}
+              onClick={() => setActiveFilter(category.id)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                activeFilter === category.id 
+                  ? 'bg-blue-600 text-white shadow-lg' 
+                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+              }`}
+              whileHover={{ 
+                scale: activeFilter !== category.id ? 1.05 : 1,
+                y: -2
+              }}
+              whileTap={{ scale: 0.95 }}
             >
-              <div className="text-2xl mb-1">{project.image}</div>
-              <div className="text-xs md:text-sm truncate">{project.title}</div>
-            </button>
+              {category.label}
+            </motion.button>
           ))}
-        </div>
+        </motion.div>
         
-        <div className="bg-gray-800 rounded-xl overflow-hidden transition-all duration-500 shadow-2xl">
-          <div className="md:grid md:grid-cols-2">
-            <div className="p-8 flex items-center justify-center bg-gradient-to-br from-blue-900 to-indigo-800">
-              <div className="text-9xl">{projects[activeIndex].image}</div>
-            </div>
-            
-            <div className="p-8">
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-2xl md:text-3xl font-bold">{projects[activeIndex].title}</h3>
-                <span className="px-3 py-1 rounded-full bg-blue-600 text-sm">{projects[activeIndex].year}</span>
-              </div>
-              
-              <p className="text-xl text-gray-300 mb-4">{projects[activeIndex].description}</p>
-              <p className="text-gray-400 mb-6">{projects[activeIndex].details}</p>
-              
-              <div>
-                <h4 className="text-lg font-semibold mb-3 text-gray-300">Technologies Used:</h4>
-                <div className="flex flex-wrap">
-                  {projects[activeIndex].technologies.map((tech, index) => (
-                    <span key={index} className="px-3 py-1 rounded-full mr-2 mb-2 bg-gray-700 text-blue-300 text-sm">
-                      {tech}
-                    </span>
-                  ))}
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          {filteredProjects.map((project, index) => (
+            <motion.div 
+              key={index}
+              className="relative group"
+              variants={itemVariants}
+              onHoverStart={() => setHoveredProject(index)}
+              onHoverEnd={() => setHoveredProject(null)}
+              whileHover={{ 
+                y: -10,
+                transition: { 
+                  type: "spring", 
+                  stiffness: 400, 
+                  damping: 17 
+                }
+              }}
+            >
+              <div className="overflow-hidden rounded-xl shadow-lg h-full bg-white">
+                <div className="relative h-48 overflow-hidden">
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: hoveredProject === index ? 1 : 0.3 }}
+                    transition={{ duration: 0.3 }}
+                  />
+                  <motion.img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover"
+                    initial={{ scale: 1 }}
+                    animate={{ 
+                      scale: hoveredProject === index ? 1.1 : 1
+                    }}
+                    transition={{ duration: 0.5 }}
+                  />
+                  <motion.div 
+                    className="absolute top-4 left-4 z-20 bg-blue-600 text-white text-xs font-semibold py-1 px-2 rounded-full"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ 
+                      opacity: 1, 
+                      x: 0,
+                      transition: { delay: index * 0.1 + 0.3 }
+                    }}
+                  >
+                    {filterCategories.find(cat => cat.id === project.category)?.label || 'Project'}
+                  </motion.div>
+                </div>
+                
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-2 text-gray-900">{project.title}</h3>
+                  <p className="text-gray-600 mb-4 text-sm">{project.description}</p>
+                  
+                  <div className="flex flex-wrap mb-4">
+                    {project.techStack.map((tech, techIndex) => (
+                      <motion.span 
+                        key={techIndex} 
+                        className="bg-gray-100 text-gray-800 text-xs px-2 py-1 rounded-full mr-2 mb-2"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ 
+                          opacity: 1, 
+                          scale: 1,
+                          transition: { delay: index * 0.05 + (techIndex * 0.1) }
+                        }}
+                        whileHover={{ 
+                          scale: 1.1, 
+                          backgroundColor: "#3B82F6",
+                          color: "white"
+                        }}
+                      >
+                        {tech}
+                      </motion.span>
+                    ))}
+                  </div>
+                  
+                  <motion.a 
+                    href={project.link} 
+                    className="inline-flex items-center font-medium text-blue-600 hover:text-blue-800 transition-colors"
+                    whileHover={{ x: 5 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    View Project
+                    <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                  </motion.a>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold mb-4">Hackathon Participation</h3>
-          <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
-            Carlos has actively participated in numerous blockchain hackathons, demonstrating his 
-            commitment to continuous learning and innovation.
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              { name: "ETHOnline By ETHGlobal", date: "Sept 17 - Oct 15, 2021", url: "https://online.ethglobal.com" },
-              { name: "Celo's Make Crypto Mobile", date: "Oct 8 - Nov 28, 2021", url: "https://mobiledefi.devpost.com" },
-              { name: "NFTHack By ETHGlobal", date: "Jan 14-16, 2022", url: "https://nft.ethglobal.co" },
-              { name: "Road To Web3 By ETHGlobal", date: "February 3-9, 2022", url: "https://web3.ethglobal.com" },
-              { name: "BUILD Quest By ETHGlobal", date: "March 4-16, 2022", url: "https://buildquest.ethglobal.com" },
-              { name: "LFGrow By ETHGlobal", date: "March 18-30, 2022", url: "https://lfgrow.ethglobal.com" },
-              { name: "DAOHacks By ETHGlobal", date: "Apr 8-10, 2022", url: "https://dao.ethglobal.com" },
-              { name: "Hack Money By ETHGlobal", date: "May 6-27, 2022", url: "https://hackathon.money" }
-            ].map((hackathon, index) => (
-              <a 
-                key={index}
-                href={hackathon.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-gray-800 rounded-lg p-4 hover:bg-gray-700 transition-all duration-300"
-              >
-                <h4 className="font-bold text-blue-400">{hackathon.name}</h4>
-                <p className="text-sm text-gray-400">{hackathon.date}</p>
-              </a>
-            ))}
-          </div>
-          
-          <div className="mt-8">
-            <a 
-              href="https://app.poap.xyz/scan/baeza.eth" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-4 py-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300"
-            >
-              <span className="mr-2">View POAPs</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
+            </motion.div>
+          ))}
+        </motion.div>
+        
+        <motion.div 
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <motion.p className="text-gray-700 mb-4">
+            These are just a few highlights from my portfolio of innovative blockchain projects.
+          </motion.p>
+          <motion.a 
+            href="https://github.com/cjbaezilla" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-6 py-3 rounded-lg bg-gray-900 text-white font-medium shadow-lg hover:bg-gray-800 transition-all duration-300"
+            whileHover={{ 
+              scale: 1.05,
+              boxShadow: "0 10px 25px rgba(0, 0, 0, 0.2)"
+            }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
+            </svg>
+            View More on GitHub
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );
