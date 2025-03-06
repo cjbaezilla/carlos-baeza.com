@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+import BackgroundCubes from './BackgroundCubes';
 
 const Hero = () => {
   // Animation variants
@@ -49,9 +50,12 @@ const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-dark-background py-16 lg:py-0">
+      {/* Three.js Background with falling cubes */}
+      <BackgroundCubes />
+      
       {/* Background gradient and blur effects */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-dark-primary to-dark-primary/80"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-dark-primary/80 to-dark-primary/50"></div>
         <motion.div
           className="absolute top-0 left-0 w-full h-full opacity-20"
           animate={{
@@ -182,65 +186,217 @@ const Hero = () => {
             </motion.div>
           </motion.div>
           
-          {/* Right column with animation */}
+          {/* Right column with Cyberpunk 3D Cube animation */}
           <motion.div
             variants={itemVariants}
             initial="hidden"
             animate="visible"
-            className="hidden lg:block"
+            className="hidden lg:flex justify-center items-center"
           >
-            <div className="relative">
-              <motion.div 
-                className="w-full h-full"
-                animate={{ 
-                  y: [0, -15, 0],
-                }}
-                transition={{ 
-                  duration: 6, 
-                  repeat: Infinity,
-                  ease: "easeInOut" 
-                }}
-              >
-                {/* Your SVG or other animation here */}
-                <img 
-                  src="https://cdn.pixabay.com/photo/2021/06/28/10/15/crypto-6371506_1280.png" 
-                  alt="Blockchain illustration" 
-                  className="w-full h-auto max-w-md mx-auto animate-border p-1"
-                />
-              </motion.div>
-              
-              {/* Floating badges */}
-              <motion.div 
-                className="absolute -top-6 -left-6 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg"
-                animate={{ 
-                  y: [0, -10, 0],
-                  rotate: [0, 5, 0, -5, 0],
-                }}
-                transition={{ 
-                  duration: 5, 
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 0.5
-                }}
-              >
-                <span className="font-bold">DeFi Expert</span>
-              </motion.div>
-              
-              <motion.div 
-                className="absolute bottom-10 -right-4 bg-purple-600 text-white px-4 py-2 rounded-lg shadow-lg"
-                animate={{ 
-                  y: [0, 10, 0],
-                  rotate: [0, -3, 0, 3, 0],
-                }}
-                transition={{ 
-                  duration: 6, 
-                  repeat: Infinity,
-                  ease: "easeInOut" 
-                }}
-              >
-                <span className="font-bold">Web3 Developer</span>
-              </motion.div>
+            <div className="scene">
+              <div className="cube">
+                <div className="cube__face cube__face--front">
+                  <div className="cube-content">
+                    <div className="cyberpunk-frame"></div>
+                    <div className="cube-pattern"></div>
+                  </div>
+                </div>
+                <div className="cube__face cube__face--back">
+                  <div className="cube-content">
+                    <div className="cyberpunk-frame"></div>
+                    <div className="cube-pattern"></div>
+                  </div>
+                </div>
+                <div className="cube__face cube__face--right">
+                  <div className="cube-content">
+                    <div className="cyberpunk-frame"></div>
+                    <div className="cube-pattern"></div>
+                  </div>
+                </div>
+                <div className="cube__face cube__face--left">
+                  <div className="cube-content">
+                    <div className="cyberpunk-frame"></div>
+                    <div className="cube-pattern"></div>
+                  </div>
+                </div>
+                <div className="cube__face cube__face--top">
+                  <div className="cube-content">
+                    <div className="cyberpunk-frame"></div>
+                    <div className="cube-pattern"></div>
+                  </div>
+                </div>
+                <div className="cube__face cube__face--bottom">
+                  <div className="cube-content">
+                    <div className="cyberpunk-frame"></div>
+                    <div className="cube-pattern"></div>
+                  </div>
+                </div>
+              </div>
             </div>
+
+            <style jsx>{`
+              .scene {
+                width: 300px;
+                height: 300px;
+                perspective: 800px;
+                margin: 0 auto;
+                position: relative;
+                z-index: 10;
+              }
+              
+              .cube {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                transform-style: preserve-3d;
+                transform: translateZ(-150px);
+                animation: cube-spin 20s infinite ease-in-out;
+              }
+              
+              .cube:hover {
+                animation-play-state: paused;
+              }
+              
+              .cube__face {
+                position: absolute;
+                width: 300px;
+                height: 300px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                color: white;
+                border: 2px solid #00f3ff;
+                box-shadow: 0 0 15px #00f3ff, inset 0 0 15px #00f3ff;
+                background: rgba(10, 12, 16, 0.8);
+                text-align: center;
+                transition: all 0.2s;
+                overflow: hidden;
+                backdrop-filter: blur(4px);
+              }
+              
+              .cube__face::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(45deg, transparent 45%, #ff00ff55 45%, #ff00ff55 55%, transparent 55%);
+                background-size: 300% 300%;
+                animation: gradient-move 3s ease infinite;
+              }
+              
+              @keyframes gradient-move {
+                0% { background-position: 0% 0%; }
+                50% { background-position: 100% 100%; }
+                100% { background-position: 0% 0%; }
+              }
+              
+              .cube__face::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2300f3ff' fill-opacity='0.2'/%3E%3C/svg%3E");
+                opacity: 0.5;
+              }
+              
+              .cube__face:hover {
+                box-shadow: 0 0 30px #00f3ff, inset 0 0 30px #00f3ff;
+              }
+              
+              .cube-content {
+                padding: 20px;
+                width: 100%;
+                height: 100%;
+                position: relative;
+                z-index: 10;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+              
+              .cube-pattern {
+                position: relative;
+                width: 80%;
+                height: 80%;
+                background-image: 
+                  linear-gradient(rgba(0, 243, 255, 0.2) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(0, 243, 255, 0.2) 1px, transparent 1px),
+                  linear-gradient(rgba(255, 0, 255, 0.1) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(255, 0, 255, 0.1) 1px, transparent 1px);
+                background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+                background-position: -1px -1px, -1px -1px, -1px -1px, -1px -1px;
+                animation: matrix-move 20s linear infinite;
+              }
+              
+              @keyframes matrix-move {
+                0% { background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px; }
+                100% { background-position: 100px 100px, 100px 100px, 100px 100px, 100px 100px; }
+              }
+              
+              .cyberpunk-text {
+                text-shadow: 0 0 5px #00f3ff, 0 0 10px #00f3ff;
+                position: relative;
+              }
+              
+              .cyberpunk-frame {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                width: 20px;
+                height: 20px;
+                border-top: 2px solid #ff00ff;
+                border-right: 2px solid #ff00ff;
+              }
+              
+              .cyberpunk-frame::before {
+                content: '';
+                position: absolute;
+                bottom: -20px;
+                left: -20px;
+                width: 20px;
+                height: 20px;
+                border-bottom: 2px solid #ff00ff;
+                border-left: 2px solid #ff00ff;
+              }
+              
+              .cube__face--front  { transform: rotateY(  0deg) translateZ(150px); }
+              .cube__face--right  { transform: rotateY( 90deg) translateZ(150px); }
+              .cube__face--back   { transform: rotateY(180deg) translateZ(150px); }
+              .cube__face--left   { transform: rotateY(-90deg) translateZ(150px); }
+              .cube__face--top    { transform: rotateX( 90deg) translateZ(150px); }
+              .cube__face--bottom { transform: rotateX(-90deg) translateZ(150px); }
+              
+              @keyframes cube-spin {
+                0% { transform: translateZ(-150px) rotateX(0deg) rotateY(0deg); }
+                25% { transform: translateZ(-150px) rotateX(90deg) rotateY(45deg); }
+                50% { transform: translateZ(-150px) rotateX(180deg) rotateY(90deg); }
+                75% { transform: translateZ(-150px) rotateX(270deg) rotateY(135deg); }
+                100% { transform: translateZ(-150px) rotateX(360deg) rotateY(180deg); }
+              }
+              
+              @keyframes text-glitch {
+                0% {
+                  text-shadow: 0.05em 0 0 #ff00ff, -0.05em -0.025em 0 #00f3ff;
+                  transform: translate(0.025em, 0.0125em);
+                }
+                15% {
+                  text-shadow: -0.05em -0.025em 0 #ff00ff, 0.025em 0.025em 0 #00f3ff;
+                }
+                50% {
+                  text-shadow: 0.05em 0.05em 0 #ff00ff, 0.05em 0 0 #00f3ff;
+                  transform: translate(0.05em, 0);
+                }
+                100% {
+                  text-shadow: -0.05em 0 0 #ff00ff, -0.025em -0.05em 0 #00f3ff;
+                  transform: translate(0.0125em, 0.05em);
+                }
+              }
+            `}</style>
           </motion.div>
         </div>
       </div>
