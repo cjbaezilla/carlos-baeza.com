@@ -8,10 +8,10 @@ const LoadingScreen = ({ isLoading }) => {
   const particlesRef = useRef([]);
   const [text, setText] = useState('');
   const phrases = [
-    'Optimizando interfaces visuales...',
-    'Cargando habilidades de desarrollo...',
-    'Procesando proyectos innovadores...',
-    'Sincronizando perfil profesional...'
+    'Initializing neural interface...',
+    'Calculating quantum algorithms...',
+    'Synthesizing holographic projections...',
+    'Calibrating interstellar coordinates...'
   ];
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
   const [letterIndex, setLetterIndex] = useState(0);
