@@ -9,6 +9,7 @@ import Projects from './components/Projects';
 import Certifications from './components/Certifications';
 import Hackathons from './components/Hackathons';
 import Navbar from './components/Navbar';
+import SecondaryNavbar from './components/SecondaryNavbar';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
 
@@ -41,7 +42,7 @@ function App() {
         if (element) {
           window.scrollTo({
             behavior: 'smooth',
-            top: element.offsetTop - 70 // Adjust for navbar height
+            top: element.offsetTop - 100 // Adjusted for combined navbar heights
           });
         }
       }
@@ -86,6 +87,7 @@ function App() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
+          <SecondaryNavbar />
           <Navbar />
           <main>
             <Hero />
