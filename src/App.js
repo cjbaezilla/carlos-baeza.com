@@ -42,7 +42,7 @@ function App() {
         if (element) {
           window.scrollTo({
             behavior: 'smooth',
-            top: element.offsetTop - 100 // Adjusted for combined navbar heights
+            top: element.offsetTop - 120 // Adjusted for combined navbar heights
           });
         }
       }
@@ -89,7 +89,7 @@ function App() {
         >
           <SecondaryNavbar />
           <Navbar />
-          <main>
+          <main className="pt-28">
             <Hero />
             <motion.div
               initial={{ opacity: 0 }}
