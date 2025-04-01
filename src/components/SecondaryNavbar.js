@@ -6,7 +6,7 @@ const SecondaryNavbar = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex justify-center md:justify-end items-center space-x-6">
           <a 
-            href="https://erc4626.carlos-baeza.com" 
+            href="https://erc4626.school" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center space-x-2 text-sm hover:text-blue-300 transition-colors duration-300"
